@@ -9,30 +9,31 @@
 /* Begin PBXBuildFile section */
 		A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041FE2C4F390F00722F48 /* AppDelegate.swift */; };
 		A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042002C4F390F00722F48 /* SceneDelegate.swift */; };
-		A2F042032C4F390F00722F48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042022C4F390F00722F48 /* ViewController.swift */; };
 		A2F042082C4F391100722F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F042072C4F391100722F48 /* Assets.xcassets */; };
 		A2F0420B2C4F391100722F48 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A2F0420A2C4F391100722F48 /* Base */; };
 		A2F042142C4F397300722F48 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2F042132C4F397300722F48 /* SnapKit */; };
-
 		A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042192C4F401900722F48 /* KickBoardAddView.swift */; };
-
 		AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */; };
 		AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */; };
 		AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623262C4F76BA00861F3A /* MainViewController.swift */; };
-
+		F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */; };
+		F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB9F2C4F837E00BC9766 /* TabBarController.swift */; };
+		F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EBA12C4F88CF00BC9766 /* empty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A2F041FB2C4F390F00722F48 /* kickBoardProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kickBoardProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F041FE2C4F390F00722F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2F042002C4F390F00722F48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A2F042022C4F390F00722F48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A2F042072C4F391100722F48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2F0420A2C4F391100722F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2F0420C2C4F391100722F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
 		AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
 		AF1623262C4F76BA00861F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
+		F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		F468EB9F2C4F837E00BC9766 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/controller/empty.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +82,7 @@
 		A2F042152C4F3E5F00722F48 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				F468EBA12C4F88CF00BC9766 /* empty.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -96,9 +98,10 @@
 		A2F042172C4F3E6C00722F48 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				A2F042022C4F390F00722F48 /* ViewController.swift */,
 				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
 				AF1623262C4F76BA00861F3A /* MainViewController.swift */,
+				F468EB9F2C4F837E00BC9766 /* TabBarController.swift */,
+				F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -190,10 +193,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2F042032C4F390F00722F48 /* ViewController.swift in Sources */,
+				F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */,
+				F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
 				AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */,
+				F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */,
 				AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */,
 				A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */,
 			);
