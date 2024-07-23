@@ -17,7 +17,8 @@
 		A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042192C4F401900722F48 /* KickBoardAddView.swift */; };
 
 		AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */; };
-		AF1623242C4F4DFE00861F3A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* MainViewController.swift */; };
+		AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */; };
+		AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623262C4F76BA00861F3A /* MainViewController.swift */; };
 
 /* End PBXBuildFile section */
 
@@ -29,11 +30,9 @@
 		A2F042072C4F391100722F48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2F0420A2C4F391100722F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2F0420C2C4F391100722F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-
+		AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
+		AF1623262C4F76BA00861F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
-
-		AF1623232C4F4DFE00861F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				A2F042022C4F390F00722F48 /* ViewController.swift */,
-				AF1623232C4F4DFE00861F3A /* MainViewController.swift */,
+				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
+				AF1623262C4F76BA00861F3A /* MainViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -193,11 +193,9 @@
 				A2F042032C4F390F00722F48 /* ViewController.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
-
+				AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */,
+				AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */,
 				A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */,
-
-				AF1623242C4F4DFE00861F3A /* MainViewController.swift in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
