@@ -10,8 +10,6 @@ import SnapKit
 
 class MyPageViewController: UIViewController {
     
-
-    
     lazy var logoutBtn: UIBarButtonItem = {
         let btn = UIBarButtonItem()
         btn.title = "logout"

@@ -9,6 +9,12 @@ import UIKit
 import KakaoMapsSDK
 import SnapKit
 
+#Preview {
+    let vc = KakaoMapViewController()
+    
+    return vc
+}
+
 class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     required init?(coder aDecoder: NSCoder) {
