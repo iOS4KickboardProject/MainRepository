@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE5E2C4F3FC400BB7B6C /* LoginViewController.swift */; };
+		4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE602C4F3FD400BB7B6C /* LoginView.swift */; };
+		4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */; };
+		4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE642C4F702000BB7B6C /* CreateUserView.swift */; };
 		A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041FE2C4F390F00722F48 /* AppDelegate.swift */; };
 		A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042002C4F390F00722F48 /* SceneDelegate.swift */; };
 		A2F042032C4F390F00722F48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042022C4F390F00722F48 /* ViewController.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F39BE5E2C4F3FC400BB7B6C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4F39BE602C4F3FD400BB7B6C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = kickBoardProject/controller/LoginView.swift; sourceTree = SOURCE_ROOT; };
+		4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
+		4F39BE642C4F702000BB7B6C /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUserView.swift; path = kickBoardProject/controller/CreateUserView.swift; sourceTree = SOURCE_ROOT; };
 		A2F041FB2C4F390F00722F48 /* kickBoardProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kickBoardProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F041FE2C4F390F00722F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2F042002C4F390F00722F48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +85,8 @@
 		A2F042162C4F3E6500722F48 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				4F39BE602C4F3FD400BB7B6C /* LoginView.swift */,
+				4F39BE642C4F702000BB7B6C /* CreateUserView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -85,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				A2F042022C4F390F00722F48 /* ViewController.swift */,
+				4F39BE5E2C4F3FC400BB7B6C /* LoginViewController.swift */,
+				4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -175,8 +187,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F042032C4F390F00722F48 /* ViewController.swift in Sources */,
+				4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */,
+				4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
+				4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
+				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PUYA877FC7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -346,6 +363,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PUYA877FC7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
