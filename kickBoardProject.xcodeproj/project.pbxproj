@@ -13,7 +13,12 @@
 		A2F042082C4F391100722F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F042072C4F391100722F48 /* Assets.xcassets */; };
 		A2F0420B2C4F391100722F48 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A2F0420A2C4F391100722F48 /* Base */; };
 		A2F042142C4F397300722F48 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2F042132C4F397300722F48 /* SnapKit */; };
+
 		A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042192C4F401900722F48 /* KickBoardAddView.swift */; };
+
+		AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */; };
+		AF1623242C4F4DFE00861F3A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* MainViewController.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +29,11 @@
 		A2F042072C4F391100722F48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2F0420A2C4F391100722F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2F0420C2C4F391100722F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+
 		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
+
+		AF1623232C4F4DFE00861F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F042142C4F397300722F48 /* SnapKit in Frameworks */,
+				AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				A2F042022C4F390F00722F48 /* ViewController.swift */,
+				AF1623232C4F4DFE00861F3A /* MainViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -119,6 +130,7 @@
 			name = kickBoardProject;
 			packageProductDependencies = (
 				A2F042132C4F397300722F48 /* SnapKit */,
+				AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */,
 			);
 			productName = kickBoardProject;
 			productReference = A2F041FB2C4F390F00722F48 /* kickBoardProject.app */;
@@ -150,6 +162,7 @@
 			mainGroup = A2F041F22C4F390F00722F48;
 			packageReferences = (
 				A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AF1623202C4F4BD000861F3A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
 			);
 			productRefGroup = A2F041FC2C4F390F00722F48 /* Products */;
 			projectDirPath = "";
@@ -180,7 +193,11 @@
 				A2F042032C4F390F00722F48 /* ViewController.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
+
 				A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */,
+
+				AF1623242C4F4DFE00861F3A /* MainViewController.swift in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +341,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DWV94Z6J6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -350,6 +368,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DWV94Z6J6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -401,6 +420,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		AF1623202C4F4BD000861F3A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -408,6 +435,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF1623202C4F4BD000861F3A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */;
+			productName = "KakaoMapsSDK-SPM";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
