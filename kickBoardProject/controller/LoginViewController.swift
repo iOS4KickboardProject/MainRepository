@@ -21,10 +21,17 @@ class LoginViewController: UIViewController{
     
     private func setAction(){
         loginView.joinButton.addTarget(self, action: #selector(joinButtonTapped), for: .touchDown)
+        loginView.logInButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchDown)
+    }
+    
+    @objc func loginButtonTapped(){
+        let tabbar = TabBarController()
+        navigationController?.pushViewController(tabbar, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     @objc func joinButtonTapped(){
-        var createUserViewController = CreateUserViewController()
+        let createUserViewController = CreateUserViewController()
         navigationController?.pushViewController(createUserViewController, animated: true)
     }
 }
