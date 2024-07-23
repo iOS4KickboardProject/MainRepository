@@ -108,7 +108,6 @@
 		A2F042172C4F3E6C00722F48 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				A2F042022C4F390F00722F48 /* ViewController.swift */,
 				4F39BE5E2C4F3FC400BB7B6C /* LoginViewController.swift */,
 				4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */,
 				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
@@ -206,7 +205,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2F042032C4F390F00722F48 /* ViewController.swift in Sources */,
 				4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */,
 				4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */,
 				F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */,
@@ -362,7 +360,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4DWV94Z6J6;
+				DEVELOPMENT_TEAM = 72GVCX2P2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -389,7 +387,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4DWV94Z6J6;
+				DEVELOPMENT_TEAM = 72GVCX2P2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
