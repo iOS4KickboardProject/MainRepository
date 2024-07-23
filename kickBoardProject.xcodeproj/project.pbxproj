@@ -13,6 +13,7 @@
 		A2F042082C4F391100722F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F042072C4F391100722F48 /* Assets.xcassets */; };
 		A2F0420B2C4F391100722F48 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A2F0420A2C4F391100722F48 /* Base */; };
 		A2F042142C4F397300722F48 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2F042132C4F397300722F48 /* SnapKit */; };
+		A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042192C4F401900722F48 /* KickBoardAddView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		A2F042072C4F391100722F48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2F0420A2C4F391100722F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2F0420C2C4F391100722F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		A2F042162C4F3E6500722F48 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A2F042192C4F401900722F48 /* KickBoardAddView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				A2F042032C4F390F00722F48 /* ViewController.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
+				A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
