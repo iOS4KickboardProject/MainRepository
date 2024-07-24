@@ -7,13 +7,6 @@
 
 import UIKit
 import KakaoMapsSDK
-import SnapKit
-
-#Preview {
-    let vc = KakaoMapViewController()
-    
-    return vc
-}
 
 class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
@@ -120,6 +113,10 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let view = mapController?.getView("mapview") as! KakaoMap
         view.viewRect = mapContainer!.bounds
         viewInit(viewName: viewName)
+        createLabelLayer()
+        createPoiStyle()
+        createPoi()
+        
     }
     
     func addViewFailed(_ viewName: String, viewInfoName: String) {
@@ -181,5 +178,45 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     var _observerAdded: Bool
     var _auth: Bool
     var _appear: Bool
+    
+    func createPoiStyle() { // 보이는 스타일 정의
+        guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
+          return
+        }
+        let labelManager = mapView.getLabelManager()
+        let image = UIImage(named: "kickboard.png")
+        let icon = PoiIconStyle(symbol: image, anchorPoint: CGPoint(x: 0.5, y: 1.0))
+        let perLevelStyle = PerLevelPoiStyle(iconStyle: icon, level: 0)
+        let poiStyle = PoiStyle(styleID: "blue", styles: [perLevelStyle])
+        labelManager.addPoiStyle(poiStyle)
+      }
+      func createLabelLayer() { // 레이어생성
+        guard let mapView = mapController?.getView("mapview") as? KakaoMap else { return }
+        let labelManager = mapView.getLabelManager()
+        let layer = LabelLayerOptions(layerID: "poiLayer", competitionType: .none, competitionUnit: .symbolFirst, orderType: .rank, zOrder: 10001)
+        let _ = labelManager.addLabelLayer(option: layer)
+      }
+      func createPoi() {
+        guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
+          return
+        }
+        let labelManager = mapView.getLabelManager()
+        guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
+          return
+        }
+        for (index, position) in poiPositions.enumerated() {
+          let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
+          if let poi = layer.addPoi(option: options, at: position) {
+            poi.show()
+          }
+        }
+      }
+    //   좌표설정
+      var poiPositions: [MapPoint] = [
+        MapPoint(longitude: 126.9137, latitude: 37.5491),
+        MapPoint(longitude: 126.9137, latitude: 37.5492),
+        MapPoint(longitude: 126.9137, latitude: 37.5493),
+        MapPoint(longitude: 126.9137, latitude: 37.5494)
+      ]
 }
 
