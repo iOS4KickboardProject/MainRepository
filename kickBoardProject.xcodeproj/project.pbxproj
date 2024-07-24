@@ -11,6 +11,10 @@
 		4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE602C4F3FD400BB7B6C /* LoginView.swift */; };
 		4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */; };
 		4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE642C4F702000BB7B6C /* CreateUserView.swift */; };
+		4F39BE692C5099A200BB7B6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */; };
+		4F39BE6C2C50B65100BB7B6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4F39BE6B2C50B65100BB7B6C /* FirebaseAnalytics */; };
+		4F39BE6F2C50BEC800BB7B6C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F39BE6E2C50BEC800BB7B6C /* FirebaseFirestore */; };
+		4F39BE712C50C79E00BB7B6C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE702C50C79E00BB7B6C /* UserModel.swift */; };
 		A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041FE2C4F390F00722F48 /* AppDelegate.swift */; };
 		A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042002C4F390F00722F48 /* SceneDelegate.swift */; };
 		A2F042082C4F391100722F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F042072C4F391100722F48 /* Assets.xcassets */; };
@@ -30,6 +34,8 @@
 		4F39BE602C4F3FD400BB7B6C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = kickBoardProject/controller/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		4F39BE642C4F702000BB7B6C /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUserView.swift; path = kickBoardProject/controller/CreateUserView.swift; sourceTree = SOURCE_ROOT; };
+		4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4F39BE702C50C79E00BB7B6C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = kickBoardProject/controller/UserModel.swift; sourceTree = SOURCE_ROOT; };
 		A2F041FB2C4F390F00722F48 /* kickBoardProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kickBoardProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F041FE2C4F390F00722F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2F042002C4F390F00722F48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,18 +56,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F042142C4F397300722F48 /* SnapKit in Frameworks */,
+				4F39BE6F2C50BEC800BB7B6C /* FirebaseFirestore in Frameworks */,
 				AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */,
+				4F39BE6C2C50B65100BB7B6C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F39BE6D2C50BEC800BB7B6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A2F041F22C4F390F00722F48 = {
 			isa = PBXGroup;
 			children = (
 				A2F041FD2C4F390F00722F48 /* kickBoardProject */,
 				A2F041FC2C4F390F00722F48 /* Products */,
+				4F39BE6D2C50BEC800BB7B6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +97,7 @@
 				A2F042162C4F3E6500722F48 /* view */,
 				A2F042152C4F3E5F00722F48 /* model */,
 				A2F042072C4F391100722F48 /* Assets.xcassets */,
+				4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */,
 				A2F042092C4F391100722F48 /* LaunchScreen.storyboard */,
 				A2F0420C2C4F391100722F48 /* Info.plist */,
 			);
@@ -91,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				F468EBA12C4F88CF00BC9766 /* empty.swift */,
+				4F39BE702C50C79E00BB7B6C /* UserModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -108,7 +126,6 @@
 		A2F042172C4F3E6C00722F48 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				A2F042022C4F390F00722F48 /* ViewController.swift */,
 				4F39BE5E2C4F3FC400BB7B6C /* LoginViewController.swift */,
 				4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */,
 				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
@@ -147,6 +164,8 @@
 			packageProductDependencies = (
 				A2F042132C4F397300722F48 /* SnapKit */,
 				AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */,
+				4F39BE6B2C50B65100BB7B6C /* FirebaseAnalytics */,
+				4F39BE6E2C50BEC800BB7B6C /* FirebaseFirestore */,
 			);
 			productName = kickBoardProject;
 			productReference = A2F041FB2C4F390F00722F48 /* kickBoardProject.app */;
@@ -179,6 +198,7 @@
 			packageReferences = (
 				A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AF1623202C4F4BD000861F3A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
+				4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A2F041FC2C4F390F00722F48 /* Products */;
 			projectDirPath = "";
@@ -196,6 +216,7 @@
 			files = (
 				A2F042082C4F391100722F48 /* Assets.xcassets in Resources */,
 				A2F0420B2C4F391100722F48 /* Base in Resources */,
+				4F39BE692C5099A200BB7B6C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,12 +227,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2F042032C4F390F00722F48 /* ViewController.swift in Sources */,
 				4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */,
 				4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */,
 				F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */,
 				F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
+				4F39BE712C50C79E00BB7B6C /* UserModel.swift in Sources */,
 				4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
 				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
@@ -433,6 +454,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.29.0;
+			};
+		};
 		A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -452,6 +481,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4F39BE6B2C50B65100BB7B6C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		4F39BE6E2C50BEC800BB7B6C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		A2F042132C4F397300722F48 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */;
