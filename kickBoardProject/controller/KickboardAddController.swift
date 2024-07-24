@@ -15,5 +15,4 @@ class KickboardAddController: UIViewController {
         super.viewDidLoad()
         view = kickBoardAddView
     }
-    
 }
