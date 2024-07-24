@@ -24,6 +24,7 @@
 		F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */; };
 		F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB9F2C4F837E00BC9766 /* TabBarController.swift */; };
 		F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EBA12C4F88CF00BC9766 /* empty.swift */; };
+		F468EBA42C4FE7F500BC9766 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EBA32C4FE7F500BC9766 /* MyPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F468EB9F2C4F837E00BC9766 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/controller/empty.swift; sourceTree = SOURCE_ROOT; };
+		F468EBA32C4FE7F500BC9766 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				4F39BE602C4F3FD400BB7B6C /* LoginView.swift */,
 				4F39BE642C4F702000BB7B6C /* CreateUserView.swift */,
 				A2F042192C4F401900722F48 /* KickBoardAddView.swift */,
+				F468EBA32C4FE7F500BC9766 /* MyPageView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
 				4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
+				F468EBA42C4FE7F500BC9766 /* MyPageView.swift in Sources */,
 				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
 				AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */,
 				F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */,
