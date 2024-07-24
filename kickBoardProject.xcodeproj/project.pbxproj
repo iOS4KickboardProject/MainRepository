@@ -37,7 +37,7 @@
 		4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		4F39BE642C4F702000BB7B6C /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUserView.swift; path = kickBoardProject/controller/CreateUserView.swift; sourceTree = SOURCE_ROOT; };
 		4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4F39BE702C50C79E00BB7B6C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = kickBoardProject/controller/UserModel.swift; sourceTree = SOURCE_ROOT; };
+		4F39BE702C50C79E00BB7B6C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = kickBoardProject/model/UserModel.swift; sourceTree = SOURCE_ROOT; };
 		A2F041FB2C4F390F00722F48 /* kickBoardProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kickBoardProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F041FE2C4F390F00722F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2F042002C4F390F00722F48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,12 +46,12 @@
 		A2F0420C2C4F391100722F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
 		A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardAddController.swift; sourceTree = "<group>"; };
-		A2F0421F2C50D04300722F48 /* Kickboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kickboard.swift; path = kickBoardProject/view/Kickboard.swift; sourceTree = SOURCE_ROOT; };
+		A2F0421F2C50D04300722F48 /* Kickboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kickboard.swift; path = kickBoardProject/model/Kickboard.swift; sourceTree = SOURCE_ROOT; };
 		AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
 		AF1623262C4F76BA00861F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F468EB9F2C4F837E00BC9766 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/controller/empty.swift; sourceTree = SOURCE_ROOT; };
+		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/model/empty.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,23 +99,13 @@
 				A2F042182C4F3E7900722F48 /* config */,
 				A2F042172C4F3E6C00722F48 /* controller */,
 				A2F042162C4F3E6500722F48 /* view */,
-				A2F042152C4F3E5F00722F48 /* model */,
+				A2F042212C50F2D700722F48 /* model */,
 				A2F042072C4F391100722F48 /* Assets.xcassets */,
 				4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */,
 				A2F042092C4F391100722F48 /* LaunchScreen.storyboard */,
 				A2F0420C2C4F391100722F48 /* Info.plist */,
 			);
 			path = kickBoardProject;
-			sourceTree = "<group>";
-		};
-		A2F042152C4F3E5F00722F48 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				F468EBA12C4F88CF00BC9766 /* empty.swift */,
-				A2F0421F2C50D04300722F48 /* Kickboard.swift */,
-				4F39BE702C50C79E00BB7B6C /* UserModel.swift */,
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		A2F042162C4F3E6500722F48 /* view */ = {
@@ -149,6 +139,16 @@
 				A2F042002C4F390F00722F48 /* SceneDelegate.swift */,
 			);
 			path = config;
+			sourceTree = "<group>";
+		};
+		A2F042212C50F2D700722F48 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F468EBA12C4F88CF00BC9766 /* empty.swift */,
+				A2F0421F2C50D04300722F48 /* Kickboard.swift */,
+				4F39BE702C50C79E00BB7B6C /* UserModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
