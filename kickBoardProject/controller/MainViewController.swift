@@ -13,7 +13,7 @@ import CoreLocation
 class MainViewController: UIViewController {
     
     let locationManager = CLLocationManager()
-
+    
     var mapContainer: KMViewContainer?
     var mapController: KMController?
     var la: Double!
@@ -21,9 +21,18 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-        setupView()
-        setLocation()
+        setupLogInViewController()
+        //setupView()
+        //setLocation()
+    }
+    func setupLogInViewController(){
+        let loginView = LoginViewController()
+        addChild(loginView)
+        self.view.addSubview(loginView.view)
+        loginView.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        loginView.didMove(toParent: self)
     }
 }
 
