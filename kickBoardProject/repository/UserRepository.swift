@@ -85,8 +85,7 @@ class UserRepository {
                 print("Error getting documents: \(error)")
                 return
             }
-            
-            for document in querySnapshot!.documents {
+                    for document in querySnapshot!.documents {
                 let data = document.data()
                 if let map = data["map"] as? [String: String],
                    let longitudeStr = map["longitude"],
