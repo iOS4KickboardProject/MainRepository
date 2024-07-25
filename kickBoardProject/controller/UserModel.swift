@@ -8,22 +8,23 @@
 import Foundation
 class UserModel{
     static let shared = UserModel()
-    private var user = userStruct()
+    private var user = UserStruct()
 
     private init() {
         
     }
     
     func updateUser(data: [String: Any]) {
-        user.autoLoginYn = data["autoLoginYn"] as? String
         user.email = data["email"] as? String
         user.lentalYn = data["lentalYn"] as? String
         user.name = data["name"] as? String
         user.pwd = data["pwd"] as? String
     }
+    func getUser() -> UserStruct {
+        return user
+    }
 }
-struct userStruct{
-    var autoLoginYn: String?
+struct UserStruct{
     var email: String?
     var lentalYn: String?
     var name: String?

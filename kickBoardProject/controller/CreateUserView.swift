@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 import SnapKit
+protocol CreateUserViewDelegate: AnyObject {
+    func showAlert(message: String)
+}
 class CreateUserView: UIView{
     private var currentIndex = 0
+    weak var delegate: CreateUserViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -200,20 +204,26 @@ class CreateUserView: UIView{
         }
     }
     @objc func tappedNextButton() {
-        let elements: [(UILabel, UITextField, UIView)] = [
-            (pwdLabel, pwdTextField, pwdTextFieldLine),
-            (pwdCheckLabel, pwdCheckTextField, pwdCheckTextFieldLine),
-            (nameLabel, nameTextField, nameTextFieldLine)
-        ]
-        
-        if currentIndex < elements.count {
-            let (label, textField, line) = elements[currentIndex]
-            label.isHidden = false
-            textField.isHidden = false
-            line.isHidden = false
-            positionNextButton(index: currentIndex)
-            currentIndex += 1
+        if currentIndex == 0 && emailTextField.text!.isEmpty{
+            delegate?.showAlert(message: "이메일을 입력해 주세요")
+            return
         }
+        
+        if currentIndex == 1 && pwdTextField.text!.isEmpty{
+            delegate?.showAlert(message: "비밀번호를 입력해 주세요")
+            return
+        }
+        if currentIndex == 2 && pwdCheckTextField.text!.isEmpty{
+            delegate?.showAlert(message: "비밀번호 확인 부분을 입력해 주세요")
+            return
+        }
+        if currentIndex == 2 && pwdCheckTextField.text! != pwdTextField.text!{
+            delegate?.showAlert(message: "비밀번호를 다시 한번 확인해 주세요")
+            return
+        }
+        
+        setPositionNextButton()
+        
     }
     private func positionNextButton(index: Int){
         if index < 2{
@@ -223,6 +233,7 @@ class CreateUserView: UIView{
                 
                 switch index {
                     case 0:
+                        
                         $0.top.equalTo(pwdTextFieldLine.snp.bottom).offset(20)
                     case 1:
                         $0.top.equalTo(pwdCheckTextFieldLine.snp.bottom).offset(20)
@@ -242,4 +253,21 @@ class CreateUserView: UIView{
         }
         layoutSubviews()
     }
+    func setPositionNextButton(){
+        let elements: [(UILabel, UITextField, UIView)] = [
+            (pwdLabel, pwdTextField, pwdTextFieldLine),
+            (pwdCheckLabel, pwdCheckTextField, pwdCheckTextFieldLine),
+            (nameLabel, nameTextField, nameTextFieldLine)
+        ]
+        
+        if currentIndex < elements.count {
+            let (label, textField, line) = elements[currentIndex]
+            label.isHidden = false
+            textField.isHidden = false
+            line.isHidden = false
+            positionNextButton(index: currentIndex)
+            currentIndex += 1
+        }
+    }
+    
 }
