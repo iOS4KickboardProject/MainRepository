@@ -24,9 +24,9 @@ class LoginViewController: UIViewController{
     
     private func setAction(){
         loginView.joinButton.addTarget(self, action: #selector(joinButtonTapped), for: .touchDown)
-<<<<<<< HEAD
+
         loginView.logInButton.addTarget(self, action: #selector(fetchUserData), for: .touchDown)
-=======
+
         loginView.logInButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchDown)
     }
     
@@ -34,7 +34,7 @@ class LoginViewController: UIViewController{
         let tabbar = TabBarController()
         navigationController?.pushViewController(tabbar, animated: true)
         navigationController?.setNavigationBarHidden(true, animated: true)
->>>>>>> dev
+
     }
     
     @objc func joinButtonTapped(){
