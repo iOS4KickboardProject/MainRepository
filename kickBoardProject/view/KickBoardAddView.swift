@@ -13,7 +13,7 @@ class KickBoardAddView: UIView {
     let kickBoardBattery = UITextField()
     let toolBar = UIToolbar()
     let pickerView = UIPickerView()
-    let mapView = UIView()
+    var mapView = UIView()
     let reloadButton = UIButton()
     let data = ["100%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", "0%"]
     let id = idSetting()
