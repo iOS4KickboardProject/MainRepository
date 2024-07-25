@@ -18,7 +18,12 @@ class LoginView: UIView{
         setupView()
         
     }
-    
+    let logo: UIImageView = {
+      let logo = UIImageView()
+      logo.image = UIImage(named: "logo")
+      logo.contentMode = .scaleAspectFit
+      return logo
+    }()
     let emailLabel: UILabel = {
         let label = UILabel()
         label.text = "Email"
@@ -82,19 +87,33 @@ class LoginView: UIView{
         return stackView
     }()
     
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissKeyboard() {
+        endEditing(true)
+    }
+    
     private func setupView(){
         backgroundColor = .white
+        setupTapGesture()
         [logInButton, joinButton].forEach {
             stackView.addArrangedSubview($0)
         }
-        [emailLabel, emailTextField, emailTextFieldLine, pwdLabel, pwdTextField, pwdTextFieldLine, stackView].forEach {
+        [emailLabel, emailTextField, emailTextFieldLine, pwdLabel, pwdTextField, pwdTextFieldLine, stackView, logo].forEach {
             addSubview($0)
         }
-        
+        logo.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(100)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
         
         emailLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
-            $0.top.equalToSuperview().offset(140)
+            $0.top.equalTo(logo.snp.bottom).offset(20)
             $0.width.equalTo(70)
             $0.height.equalTo(20)
         }

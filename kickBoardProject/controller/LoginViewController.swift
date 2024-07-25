@@ -66,6 +66,14 @@ class LoginViewController: UIViewController{
     
     ///조회 후 로그인
     @objc func loginButtonTapped() {
+        if loginView.emailTextField.text!.isEmpty{
+            showAlert(message: "이메일를 작성해 주세요.")
+            return
+        }
+        if loginView.pwdTextField.text!.isEmpty{
+            showAlert(message: "비밀번호를 작성해 주세요.")
+            return
+        }
         userRepository.retrieveUserData(email: loginView.emailTextField.text!){ [weak self] user in
             guard let self = self else { return }
             self.user = user
@@ -73,11 +81,15 @@ class LoginViewController: UIViewController{
             if let user = user, user.email == loginView.emailTextField.text!, user.pwd == loginView.pwdTextField.text! {
                 self.Pushtabbar()
             } else {
-                print("로그인 불가 alert추가")
+                showAlert(message: "로그인 정보를 다시 확인 해주세요.")
             }
         }
     }
-    
+    func showAlert(message: String){
+        let alert = UIAlertController(title: "확인", message: "\(message)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 
     
     
