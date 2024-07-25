@@ -31,8 +31,8 @@ class MyPageViewController: UIViewController {
     func setTableView() {
         myPageView.kickboardTableView.dataSource = self
         myPageView.kickboardTableView.delegate = self
-        myPageView.useTableView.dataSource = self
-        myPageView.useTableView.delegate = self
+        myPageView.historyTableView.dataSource = self
+        myPageView.historyTableView.delegate = self
     }
     
     func setNav() {
@@ -73,7 +73,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == myPageView.kickboardTableView {
             return kickBoardItems.count
-        } else if tableView == myPageView.useTableView {
+        } else if tableView == myPageView.historyTableView {
             return useItems.count
         }
         return 0
@@ -89,7 +89,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             kickboardCell.selectionStyle = .none
             // 내 킥보드 이름, 배터리 잔량
             return kickboardCell
-        } else if tableView == myPageView.useTableView {
+        } else if tableView == myPageView.historyTableView {
             let historyCell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
             historyCell.selectionStyle = .none
             return historyCell

@@ -50,7 +50,7 @@ class MyPageView: UIView {
         return label
     }()
     
-    let useTableView: UITableView = {
+    let historyTableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 60
         tableView.backgroundColor = .white
@@ -60,7 +60,7 @@ class MyPageView: UIView {
     
     lazy var useView: UIView = {
         let v = UIView()
-        [useLabel, useTableView].forEach {
+        [useLabel, historyTableView].forEach {
             v.addSubview($0)
         }
         return v
@@ -107,7 +107,7 @@ class MyPageView: UIView {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        useTableView.snp.makeConstraints {
+        historyTableView.snp.makeConstraints {
             $0.top.equalTo(useLabel.snp.bottom).offset(10)
             $0.left.right.bottom.equalToSuperview()
         }
