@@ -54,6 +54,7 @@ class MyPageView: UIView {
         let tableView = UITableView()
         tableView.rowHeight = 60
         tableView.backgroundColor = .white
+        tableView.register(HistoryCell.self, forCellReuseIdentifier: "HistoryCell")
         return tableView
     }()
     
