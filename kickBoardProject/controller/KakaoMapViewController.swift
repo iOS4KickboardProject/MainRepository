@@ -3,7 +3,7 @@
 //  kickBoardProject
 //
 //  Created by 이득령 on 7/23/24.
-//
+///
 
 import UIKit
 import KakaoMapsSDK
