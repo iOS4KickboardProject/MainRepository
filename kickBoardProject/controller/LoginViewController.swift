@@ -21,10 +21,15 @@ class LoginViewController: UIViewController{
         db = Firestore.firestore()
         setAction()
     }
+    //화면 터치했을때 키보드 내리기 삭제 금지
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     private func setAction(){
         loginView.joinButton.addTarget(self, action: #selector(joinButtonTapped), for: .touchDown)
         loginView.logInButton.addTarget(self, action: #selector(fetchUserData), for: .touchDown)
+//        loginView.logInButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchDown)
     }
     
     @objc func loginButtonTapped(){
@@ -53,5 +58,9 @@ class LoginViewController: UIViewController{
                 print("조회된 데이터가 없을때")
             }
         }
+        //탭바로 화면전환 코드
+        let tabbar = TabBarController()
+        navigationController?.pushViewController(tabbar, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }

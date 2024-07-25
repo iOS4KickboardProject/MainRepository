@@ -14,6 +14,7 @@ class MyPageView: UIView {
         let label = UILabel()
         label.text = "현재 이용중이 아닙니다"
         label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .black
         return label
     }()
     
@@ -21,12 +22,15 @@ class MyPageView: UIView {
         let label = UILabel()
         label.text = "내 킥보드"
         label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .black
         return label
     }()
     
     let kickboardTableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 60
+        tableView.register(AddedKickboardCell.self, forCellReuseIdentifier: "AddedKickboardCell")
+        tableView.backgroundColor = .white
         return tableView
     }()
     
@@ -42,12 +46,14 @@ class MyPageView: UIView {
         let label = UILabel()
         label.text = "이용내역"
         label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .black
         return label
     }()
     
     let useTableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 60
+        tableView.backgroundColor = .white
         return tableView
     }()
     
@@ -76,6 +82,7 @@ class MyPageView: UIView {
     }
     
     private func configureUI() {
+        self.backgroundColor = .white
         [statusLabel, tableViewStackView].forEach {
             self.addSubview($0)
         }

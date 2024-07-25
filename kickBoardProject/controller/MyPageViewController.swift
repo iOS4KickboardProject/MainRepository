@@ -12,7 +12,7 @@ class MyPageViewController: UIViewController {
     
     var myPageView: MyPageView!
     
-    let kickBoardItems = ["first kickboard", "second kickboard", "third kickboard", "fourth kickboard", "fiveth kickboard"]
+    var kickBoardItems = ["first kickboard", "second kickboard", "third kickboard", "fourth kickboard", "fiveth kickboard"]
     let useItems = ["first used 1000$", "second usage 500$", "third usage 700$", "fourth usage 800$", "fiveth usage 900$"]
     
     override func loadView() {
@@ -65,10 +65,24 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         if tableView == myPageView.kickboardTableView {
-            cell.textLabel?.text = kickBoardItems[indexPath.row]
+            let kickboardCell = tableView.dequeueReusableCell(withIdentifier: "AddedKickboardCell", for: indexPath) as! AddedKickboardCell
+            kickboardCell.kickboardName.text = kickBoardItems[indexPath.row]
+            kickboardCell.selectionStyle = .none
+            // 내 킥보드 이름, 배터리 잔량
+            return kickboardCell
         } else if tableView == myPageView.useTableView {
             cell.textLabel?.text = useItems[indexPath.row]
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if tableView == myPageView.kickboardTableView {
+            if editingStyle == .delete {
+                kickBoardItems.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                // 내 킥보드 삭제하는 코드 넣기
+            }
+        }
     }
 }
