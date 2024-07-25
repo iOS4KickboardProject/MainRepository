@@ -34,7 +34,6 @@ class LoginViewController: UIViewController{
         let tabbar = TabBarController()
         navigationController?.pushViewController(tabbar, animated: true)
         navigationController?.setNavigationBarHidden(true, animated: true)
->>>>>>> dev
     }
     
     @objc func joinButtonTapped(){
