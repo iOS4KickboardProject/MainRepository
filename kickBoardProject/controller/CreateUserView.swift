@@ -125,8 +125,17 @@ class CreateUserView: UIView{
         button.layer.cornerRadius = 10
         return button
     }()
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissKeyboard() {
+        endEditing(true)
+    }
     func setupView(){
         backgroundColor = .white
+        setupTapGesture()
         [joinLabel, emailLabel, emailTextField, emailTextFieldLine, pwdLabel, pwdTextField, pwdTextFieldLine, pwdCheckLabel, pwdCheckTextField, pwdCheckTextFieldLine, nameLabel,nameTextField, nameTextFieldLine, nextButton, createButton].forEach { addSubview($0) }
         
         joinLabel.snp.makeConstraints {
