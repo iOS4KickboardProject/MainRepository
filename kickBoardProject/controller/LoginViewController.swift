@@ -24,9 +24,9 @@ class LoginViewController: UIViewController{
     
     private func setAction(){
         loginView.joinButton.addTarget(self, action: #selector(joinButtonTapped), for: .touchDown)
-<<<<<<< HEAD
+
         loginView.logInButton.addTarget(self, action: #selector(fetchUserData), for: .touchDown)
-=======
+
         loginView.logInButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchDown)
     }
     
