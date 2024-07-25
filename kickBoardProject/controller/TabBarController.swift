@@ -1,7 +1,7 @@
 //
 //  TabBarController.swift
 //  kickBoardProject
-//
+//ㅁ
 //  Created by Soo Jang on 7/23/24.
 //
 
@@ -15,8 +15,8 @@ class TabBarController: UITabBarController {
         self.tabBar.tintColor = .black
         
         let myPageVC = UINavigationController(rootViewController: MyPageViewController())
-        let kakaoMapVC = UINavigationController(rootViewController: KakaoMapViewController())
-        let mainVC = UINavigationController(rootViewController: MainViewController())
+        let kakaoMapVC = UINavigationController(rootViewController: KickboardAddController())
+        let mainVC = UINavigationController(rootViewController: KakaoMapViewController())
 
         
         kakaoMapVC.tabBarItem = UITabBarItem(title: "등록", image: UIImage(systemName: "plus.square"), selectedImage: UIImage(systemName: "plus.square.fill"))

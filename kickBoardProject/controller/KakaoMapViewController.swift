@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoMapsSDK
+import CoreLocation
 
 class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
@@ -32,6 +33,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLocation()
+        setNavigation()
         
         mapContainer = KMViewContainer()
         view.addSubview(mapContainer!)
@@ -41,6 +44,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         
         mapController = KMController(viewContainer: mapContainer!)
         mapController?.delegate = self
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +79,21 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             mapController?.activateEngine()
         }
     }
+    //MARK: - Button
+    @objc func btnTapped() {
+        
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        
+        manager.addPositions(long: long, lati: lati)
+        
+        print(long)
+        print(lati)
+        
+        createPoi()
+        
+        moveCamera(long: long, lati: lati)
+    }
     
     func authenticationFailed(_ errorCode: Int, desc: String) {
         print("error code: \(errorCode)")
@@ -101,8 +121,14 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     func addViews() {
         let defaultPosition = MapPoint(longitude: 127.108678, latitude: 37.402001)
-        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 7)
+        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 3)
         mapController?.addView(mapviewInfo)
+    }
+    func moveCamera(long: Double, lati: Double) {
+        let mapView = mapController?.getView("mapview") as! KakaoMap
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
+        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 3000))
+        
     }
     
     func viewInit(viewName: String) {
@@ -116,7 +142,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         createLabelLayer()
         createPoiStyle()
         createPoi()
-        
     }
     
     func addViewFailed(_ viewName: String, viewInfoName: String) {
@@ -146,6 +171,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     @objc func didBecomeActive() {
         mapController?.activateEngine()
+        
+        
     }
     
     func showToast(_ view: UIView, message: String, duration: TimeInterval = 2.0) {
@@ -178,10 +205,13 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     var _observerAdded: Bool
     var _auth: Bool
     var _appear: Bool
+    let manager = MapManager.manager
+    let locationManager = CLLocationManager()
+    
     
     func createPoiStyle() { // 보이는 스타일 정의
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
-          return
+            return
         }
         let labelManager = mapView.getLabelManager()
         let image = UIImage(named: "kickboard.png")
@@ -189,34 +219,104 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let perLevelStyle = PerLevelPoiStyle(iconStyle: icon, level: 0)
         let poiStyle = PoiStyle(styleID: "blue", styles: [perLevelStyle])
         labelManager.addPoiStyle(poiStyle)
-      }
-      func createLabelLayer() { // 레이어생성
+    }
+    func createLabelLayer() { // 레이어생성
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else { return }
         let labelManager = mapView.getLabelManager()
         let layer = LabelLayerOptions(layerID: "poiLayer", competitionType: .none, competitionUnit: .symbolFirst, orderType: .rank, zOrder: 10001)
         let _ = labelManager.addLabelLayer(option: layer)
-      }
-      func createPoi() {
+    }
+    func createPoi() {
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
-          return
+            return
         }
         let labelManager = mapView.getLabelManager()
         guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
-          return
+            return
         }
-        for (index, position) in poiPositions.enumerated() {
-          let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
-          if let poi = layer.addPoi(option: options, at: position) {
-            poi.show()
-          }
+        for (index, position) in manager.poiPositions.enumerated() {
+            let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
+            if let poi = layer.addPoi(option: options, at: position) {
+                poi.show()
+            }
         }
-      }
-    //   좌표설정
-      var poiPositions: [MapPoint] = [
-        MapPoint(longitude: 126.9137, latitude: 37.5491),
-        MapPoint(longitude: 126.9137, latitude: 37.5492),
-        MapPoint(longitude: 126.9137, latitude: 37.5493),
-        MapPoint(longitude: 126.9137, latitude: 37.5494)
-      ]
+    }
+    func reloadMapView() {
+        guard let mapContainer = mapContainer else { return }
+        
+        // 현재 Map View 제거
+        mapContainer.removeFromSuperview()
+        
+        // 새로운 Map Container 및 Map View 생성
+        let newMapContainer = KMViewContainer()
+        view.addSubview(newMapContainer)
+        newMapContainer.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        mapController = KMController(viewContainer: newMapContainer)
+        mapController?.delegate = self
+        mapController?.prepareEngine()
+        
+        // 다시 POI를 추가합니다
+        createLabelLayer()
+        createPoiStyle()
+        createPoi()
+    }
+}
+extension KakaoMapViewController {
+    
+    //MARK: - 워치 관련
+    private func setLocation() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    
+    
+    private func setNavigation() {
+        title = "지도"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
+        let addButton = UIBarButtonItem(title: "불러오기", style: .plain, target: self, action: #selector(btnTapped))
+        addButton.tintColor = UIColor.gray
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
 }
 
+extension KakaoMapViewController: CLLocationManagerDelegate {
+    
+    func getLocationUsagePermission() {
+        self.locationManager.requestWhenInUseAuthorization()
+    }
+    func startLoactionUpdates() {
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("didUpdateLocations")
+        if let location = locations.first {
+            print("위도: \(location.coordinate.latitude)")
+            print("경도: \(location.coordinate.longitude)")
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("권한 설정됨")
+            case .notDetermined:
+                print("권한 설정되지 않음")
+            case .restricted:
+                print("권한 요청 거부됨")
+            default:
+                print("GPS default")
+                
+            }
+        }
+        
+    }
+}
