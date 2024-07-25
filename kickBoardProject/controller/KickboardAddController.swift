@@ -34,14 +34,13 @@ class KickboardAddController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        locationSetting()
     }
     
     func locationSetting() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
         
-        manager.addPositions(long: long, lati: lati)
+        //manager.addPositions(long: long, lati: lati)
         
         print(long)
         print(lati)
@@ -52,30 +51,7 @@ class KickboardAddController: UIViewController {
     }
     
     @objc func btnTapped() {
-//        locationManager.startUpdatingLocation()
-//    
-//        print("위도\(locationManager.location?.coordinate.latitude)")
-//        print("경도\(locationManager.location?.coordinate.longitude)")
-//        
-//        guard let long = locationManager.location?.coordinate.longitude else { return }
-//        guard let lati = locationManager.location?.coordinate.latitude else { return }
-
-//        guard let long = locationManager.location?.coordinate.longitude else { return }
-//        guard let lati = locationManager.location?.coordinate.latitude else { return }
-//        
-//        manager.addPositions(long: long, lati: lati)
-//        
-//        print(long)
-//        print(lati)
-//        
-//        apiSampleVC.createPoi()
-//        
-//        apiSampleVC.moveCamera(long: long, lati: lati)
-        
         locationSetting()
-        
-//        KakaoMapViewController().createPoi(long: long, lati: lati)
-        
     }
 }
 
