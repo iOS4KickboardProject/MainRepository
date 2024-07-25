@@ -11,9 +11,7 @@ import SnapKit
 class MyPageViewController: UIViewController {
     
     var myPageView: MyPageView!
-    
-    var userData: UserStruct?
-    
+
     var kickBoardItems: [(String, Int)] = [("first kickboard", 1), ("second kickboard", 25), ("third kickboard", 51), ("fourth kickboard", 75), ("fiveth kickboard", 100)]
     let useItems = ["first used 1000$", "second usage 500$", "third usage 700$", "fourth usage 800$", "fiveth usage 900$"]
     
@@ -28,8 +26,6 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = .white
         setNav()
         setTableView()
-        
-        userData = UserModel.shared.getUser()
     }
     
     func setTableView() {
@@ -40,7 +36,7 @@ class MyPageViewController: UIViewController {
     }
     
     func setNav() {
-        self.navigationItem.title = userData?.name
+        self.navigationItem.title = UserModel.shared.getUser().name
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [ .foregroundColor : UIColor.black]
