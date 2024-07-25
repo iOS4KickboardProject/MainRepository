@@ -96,6 +96,14 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         
     }
     
+    @objc
+    func touchUpPresentModalButton(_ sender: UIButton) {
+        let vc = ModelViewcontroller()
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func authenticationFailed(_ errorCode: Int, desc: String) {
         print("error code: \(errorCode)")
         print("desc: \(desc)")
@@ -141,7 +149,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         view.viewRect = mapContainer!.bounds
         viewInit(viewName: viewName)
         userRepository.fetchAllPois()
-
+        
         createLabelLayer()
         createPoiStyle()
         createPoi()
@@ -202,7 +210,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             toastLabel.removeFromSuperview()
         }
     }
-    
+    var modalShow = false
     var mapContainer: KMViewContainer?
     var mapController: KMController?
     var _observerAdded: Bool
@@ -211,7 +219,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     let manager = MapManager.manager
     let locationManager = CLLocationManager()
     let userRepository = UserRepository()
-
+    
     
     func createPoiStyle() { // 보이는 스타일 정의
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
@@ -257,7 +265,22 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         print(param.poiItem.itemID)
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
+        modalShow = true
+        presentModalIfNeeded()
+        
+    }
     
+    func presentModalIfNeeded() {
+        if modalShow {
+            let modalVC = ModelViewcontroller()
+            modalVC.modalPresentationStyle = .pageSheet
+            if let sheet = modalVC.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.preferredCornerRadius = 24.0
+            }
+            modalVC.preferredContentSize = CGSize(width: view.frame.width, height: 300)
+            present(modalVC, animated: true, completion: nil)
+        }
     }
     
     func reloadMapView() {

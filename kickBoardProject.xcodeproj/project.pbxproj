@@ -26,6 +26,7 @@
 		A2F042202C50D04300722F48 /* Kickboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0421F2C50D04300722F48 /* Kickboard.swift */; };
 		AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */; };
 		AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */; };
+		AF68D8642C525B5A00489DF6 /* ModelViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D8632C525B5A00489DF6 /* ModelViewcontroller.swift */; };
 		AF8FD08A2C510ED00033B7C1 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8FD0892C510ED00033B7C1 /* MapManager.swift */; };
 		F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB9F2C4F837E00BC9766 /* TabBarController.swift */; };
 		F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EBA12C4F88CF00BC9766 /* empty.swift */; };
@@ -53,6 +54,7 @@
 		A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardAddController.swift; sourceTree = "<group>"; };
 		A2F0421F2C50D04300722F48 /* Kickboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kickboard.swift; path = kickBoardProject/view/Kickboard.swift; sourceTree = SOURCE_ROOT; };
 		AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
+		AF68D8632C525B5A00489DF6 /* ModelViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewcontroller.swift; sourceTree = "<group>"; };
 		AF8FD0892C510ED00033B7C1 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		F468EB9F2C4F837E00BC9766 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/controller/empty.swift; sourceTree = SOURCE_ROOT; };
@@ -157,6 +159,7 @@
 				F468EB9F2C4F837E00BC9766 /* TabBarController.swift */,
 				A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */,
 				F4BB0F382C521F9A00BC6742 /* MyPageViewController.swift */,
+				AF68D8632C525B5A00489DF6 /* ModelViewcontroller.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				4F39BE742C51139F00BB7B6C /* UserRepository.swift in Sources */,
 				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
 				AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */,
+				AF68D8642C525B5A00489DF6 /* ModelViewcontroller.swift in Sources */,
 				F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */,
 				A2F0421C2C4F8DD300722F48 /* KickboardAddController.swift in Sources */,
 				A2F042202C50D04300722F48 /* Kickboard.swift in Sources */,
