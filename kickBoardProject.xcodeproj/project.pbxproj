@@ -23,9 +23,10 @@
 		A2F042142C4F397300722F48 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2F042132C4F397300722F48 /* SnapKit */; };
 		A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042192C4F401900722F48 /* KickBoardAddView.swift */; };
 		A2F0421C2C4F8DD300722F48 /* KickboardAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */; };
+		A2F042202C50D04300722F48 /* Kickboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0421F2C50D04300722F48 /* Kickboard.swift */; };
 		AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */; };
 		AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */; };
-		AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623262C4F76BA00861F3A /* MainViewController.swift */; };
+		AF8FD08A2C510ED00033B7C1 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8FD0892C510ED00033B7C1 /* MapManager.swift */; };
 		F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */; };
 		F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB9F2C4F837E00BC9766 /* TabBarController.swift */; };
 		F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EBA12C4F88CF00BC9766 /* empty.swift */; };
@@ -47,8 +48,9 @@
 		A2F0420C2C4F391100722F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
 		A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardAddController.swift; sourceTree = "<group>"; };
+		A2F0421F2C50D04300722F48 /* Kickboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kickboard.swift; path = kickBoardProject/view/Kickboard.swift; sourceTree = SOURCE_ROOT; };
 		AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
-		AF1623262C4F76BA00861F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		AF8FD0892C510ED00033B7C1 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F468EB9F2C4F837E00BC9766 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/controller/empty.swift; sourceTree = SOURCE_ROOT; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				F468EBA12C4F88CF00BC9766 /* empty.swift */,
+				A2F0421F2C50D04300722F48 /* Kickboard.swift */,
 				4F39BE702C50C79E00BB7B6C /* UserModel.swift */,
 			);
 			path = model;
@@ -142,7 +145,6 @@
 				4F39BE5E2C4F3FC400BB7B6C /* LoginViewController.swift */,
 				4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */,
 				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
-				AF1623262C4F76BA00861F3A /* MainViewController.swift */,
 				F468EB9F2C4F837E00BC9766 /* TabBarController.swift */,
 				F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */,
 				A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */,
@@ -153,6 +155,7 @@
 		A2F042182C4F3E7900722F48 /* config */ = {
 			isa = PBXGroup;
 			children = (
+				AF8FD0892C510ED00033B7C1 /* MapManager.swift */,
 				A2F041FE2C4F390F00722F48 /* AppDelegate.swift */,
 				A2F042002C4F390F00722F48 /* SceneDelegate.swift */,
 			);
@@ -245,6 +248,7 @@
 				4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */,
 				F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */,
 				F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */,
+				AF8FD08A2C510ED00033B7C1 /* MapManager.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
 				4F39BE712C50C79E00BB7B6C /* UserModel.swift in Sources */,
 				4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */,
@@ -253,8 +257,8 @@
 				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
 				AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */,
 				F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */,
-				AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */,
 				A2F0421C2C4F8DD300722F48 /* KickboardAddController.swift in Sources */,
+				A2F042202C50D04300722F48 /* Kickboard.swift in Sources */,
 				A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,7 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 72GVCX2P2A;
+				DEVELOPMENT_TEAM = 4DWV94Z6J6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -426,7 +430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 72GVCX2P2A;
+				DEVELOPMENT_TEAM = 4DWV94Z6J6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
