@@ -16,13 +16,11 @@ class TabBarController: UITabBarController {
         
         let myPageVC = UINavigationController(rootViewController: MyPageViewController())
         let kakaoMapVC = UINavigationController(rootViewController: KakaoMapViewController())
-//        let mainVC = UINavigationController(rootViewController: MainViewController())
         let addVC = UINavigationController(rootViewController: KickboardAddController())
 
         
-        kakaoMapVC.tabBarItem = UITabBarItem(title: "등록", image: UIImage(systemName: "plus.square"), selectedImage: UIImage(systemName: "plus.square.fill"))
-//        mainVC.tabBarItem = UITabBarItem(title: "지도", image: UIImage(systemName: "map"), selectedImage: UIImage(systemName: "map.fill"))
-        addVC.tabBarItem = UITabBarItem(title: "지도", image: UIImage(systemName: "map"), selectedImage: UIImage(systemName: "map.fill"))
+        addVC.tabBarItem = UITabBarItem(title: "등록", image: UIImage(systemName: "plus.square"), selectedImage: UIImage(systemName: "plus.square.fill"))
+        kakaoMapVC.tabBarItem = UITabBarItem(title: "지도", image: UIImage(systemName: "map"), selectedImage: UIImage(systemName: "map.fill"))
         myPageVC.tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
         
         //탭바에 등록할 컨트롤러 추가

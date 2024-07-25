@@ -20,6 +20,10 @@ class LoginViewController: UIViewController{
         super.viewDidLoad()
         retrieveAutoLogin()
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     func retrieveAutoLogin(){
         let autoLoginYn = UserDefaults.standard.string(forKey: "autoLoginYn")
         guard let autoLoginYn = autoLoginYn else {
@@ -77,8 +81,4 @@ class LoginViewController: UIViewController{
             }
         }
     }
-    
-
-    
-    
 }
