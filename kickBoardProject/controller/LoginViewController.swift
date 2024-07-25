@@ -10,52 +10,75 @@ import UIKit
 import FirebaseFirestore
 class LoginViewController: UIViewController{
     let loginView = LoginView()
-    var db: Firestore!
-    var userModel: UserModel?
+    let userRepository = UserRepository()
+    var user: UserStruct!
     override func loadView() {
         view = loginView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        db = Firestore.firestore()
-        setAction()
+        retrieveAutoLogin()
+    }
+    func retrieveAutoLogin(){
+        let autoLoginYn = UserDefaults.standard.string(forKey: "autoLoginYn")
+        guard let autoLoginYn = autoLoginYn else {
+            setupLogInViewController()
+            return
+        }
+        if autoLoginYn == "Y"{
+            guard let email = UserDefaults.standard.string(forKey: "email") else { return }
+            userRepository.retrieveUserData(email: email){ [weak self] user in
+                guard let self = self else { return }
+                self.user = user
+                Pushtabbar()
+            }
+            
+        }else{
+            setAction()
+        }
     }
     
+    func setupLogInViewController(){
+        let loginView = LoginViewController()
+        addChild(loginView)
+        self.view.addSubview(loginView.view)
+        loginView.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        loginView.didMove(toParent: self)
+    }
     private func setAction(){
         loginView.joinButton.addTarget(self, action: #selector(joinButtonTapped), for: .touchDown)
-
-        loginView.logInButton.addTarget(self, action: #selector(fetchUserData), for: .touchDown)
-
         loginView.logInButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchDown)
     }
     
-    @objc func loginButtonTapped(){
+    private func Pushtabbar(){
         let tabbar = TabBarController()
         navigationController?.pushViewController(tabbar, animated: true)
         navigationController?.setNavigationBarHidden(true, animated: true)
-
     }
     
     @objc func joinButtonTapped(){
         let createUserViewController = CreateUserViewController()
         navigationController?.pushViewController(createUserViewController, animated: true)
     }
-    //수정중
-    @objc func fetchUserData() {
-        // 컬렉션 "users"에서 문서 "user1" 가져오기
-        db.collection("users").document("user2").getDocument { [weak self] (document, error) in
+    
+    ///조회 후 로그인
+    @objc func loginButtonTapped() {
+        userRepository.retrieveUserData(email: loginView.emailTextField.text!){ [weak self] user in
             guard let self = self else { return }
-            
-            if let document = document, document.exists {
-                let data = document.data()
-                if let data = data {
-                    UserModel.shared.updateUser(data: data)
-                    print("UserModel: \(userModel)")
-                }
+            self.user = user
+
+            if let user = user, user.email == loginView.emailTextField.text!, user.pwd == loginView.pwdTextField.text! {
+                self.Pushtabbar()
             } else {
-                print("조회된 데이터가 없을때")
+                print("로그인 불가 alert추가")
             }
         }
     }
+    
+
+    
+    
 }
