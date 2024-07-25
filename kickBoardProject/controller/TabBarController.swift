@@ -15,8 +15,9 @@ class TabBarController: UITabBarController {
         self.tabBar.tintColor = .black
         
         let myPageVC = UINavigationController(rootViewController: MyPageViewController())
-        let kakaoMapVC = UINavigationController(rootViewController: KickboardAddController())
-        let addVC = UINavigationController(rootViewController: KakaoMapViewController())
+        let kakaoMapVC = UINavigationController(rootViewController: KakaoMapViewController())
+//        let mainVC = UINavigationController(rootViewController: MainViewController())
+        let addVC = UINavigationController(rootViewController: KickboardAddController())
 
         
         kakaoMapVC.tabBarItem = UITabBarItem(title: "등록", image: UIImage(systemName: "plus.square"), selectedImage: UIImage(systemName: "plus.square.fill"))
