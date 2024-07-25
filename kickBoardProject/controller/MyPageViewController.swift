@@ -12,6 +12,8 @@ class MyPageViewController: UIViewController {
     
     var myPageView: MyPageView!
     
+    var userData: UserStruct?
+    
     var kickBoardItems: [(String, Int)] = [("first kickboard", 1), ("second kickboard", 25), ("third kickboard", 51), ("fourth kickboard", 75), ("fiveth kickboard", 100)]
     let useItems = ["first used 1000$", "second usage 500$", "third usage 700$", "fourth usage 800$", "fiveth usage 900$"]
     
@@ -26,6 +28,8 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = .white
         setNav()
         setTableView()
+        
+        userData = UserModel.shared.getUser()
     }
     
     func setTableView() {
@@ -36,7 +40,7 @@ class MyPageViewController: UIViewController {
     }
     
     func setNav() {
-        self.navigationItem.title = "my page"
+        self.navigationItem.title = userData?.name
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.largeTitleTextAttributes = [ .foregroundColor : UIColor.black]
@@ -80,7 +84,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
         if tableView == myPageView.kickboardTableView {
             let kickboardCell = tableView.dequeueReusableCell(withIdentifier: "AddedKickboardCell", for: indexPath) as! AddedKickboardCell
             kickboardCell.kickboardName.text = kickBoardItems[indexPath.row].0
@@ -94,7 +97,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             historyCell.selectionStyle = .none
             return historyCell
         }
-        return cell
+        return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
