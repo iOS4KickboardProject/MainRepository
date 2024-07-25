@@ -20,6 +20,10 @@ class LoginViewController: UIViewController{
         super.viewDidLoad()
         retrieveAutoLogin()
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     func retrieveAutoLogin(){
         let autoLoginYn = UserDefaults.standard.string(forKey: "autoLoginYn")
         guard let autoLoginYn = autoLoginYn else {
@@ -85,12 +89,10 @@ class LoginViewController: UIViewController{
             }
         }
     }
+
     func showAlert(message: String){
         let alert = UIAlertController(title: "확인", message: "\(message)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
-    
-    
 }

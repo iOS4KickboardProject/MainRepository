@@ -237,10 +237,19 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         for (index, position) in manager.poiPositions.enumerated() {
             let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
             if let poi = layer.addPoi(option: options, at: position) {
+                poi.clickable = true
+                poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
                 poi.show()
             }
         }
     }
+    
+    func poiTappedHandler(_ param: PoiInteractionEventParam) {
+        print("click!!")
+        print(param.poiItem.itemID)
+
+    }
+    
     func reloadMapView() {
         guard let mapContainer = mapContainer else { return }
         
