@@ -204,7 +204,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     @objc
     func touchUpPresentModalButton(_ sender: UIButton) {
-        let vc = ModelViewcontroller()
+        let vc = RentModalViewcontroller()
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.present(vc, animated: true, completion: nil)
     }
