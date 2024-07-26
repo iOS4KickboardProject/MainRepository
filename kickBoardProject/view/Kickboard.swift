@@ -7,7 +7,21 @@
 
 import Foundation
 
-struct Kickboard {
+class KickBoard {
+    static let shared = KickBoard()
+    private var kickBoards: [KickboardStruct] = []
+    
+    private init(kickBoards: [KickboardStruct]) {
+        self.kickBoards = kickBoards
+    }
+    
+    private init() {
+        
+    }
+}
+
+
+struct KickboardStruct {
     let id: String
     let userEmail: String
     let battery: String

@@ -1,16 +1,32 @@
 //
-//  MainViewController.swift
+//  KakaoMapVC.swift
 //  kickBoardProject
 //
-//  Created by 이득령 on 7/23/24
-///
+//  Created by 박승환 on 7/26/24.
+//
 
+import Foundation
 import UIKit
-import KakaoMapsSDK
+import SnapKit
 import CoreLocation
+import KakaoMapsSDK
 
-class KakaoMapViewController: UIViewController, MapControllerDelegate {
+class KakaoMapVC: UIViewController, MapControllerDelegate {
+    // KakaoMap
+    // 변수 부분
+    var modalShow = false
+    var mapContainer: KMViewContainer?
+    var mapController: KMController?
+    var shared = UserRepository.shared
+    var _observerAdded: Bool
+    var _auth: Bool
+    var _appear: Bool
+    let locationManager = CLLocationManager()
+    let userRepository = UserRepository()
+    var lo: Double = 0.0
+    var la: Double = 0.0
     
+    // 클래스 생성 삭제 부분
     required init?(coder aDecoder: NSCoder) {
         _observerAdded = false
         _auth = false
@@ -31,11 +47,11 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         print("deinit")
     }
     
+    // 뷰컨 생성 주기 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         setLocation()
-        setNavigation()
-        
+        locationSetting()
         mapContainer = KMViewContainer()
         view.addSubview(mapContainer!)
         mapContainer?.snp.makeConstraints { make in
@@ -46,8 +62,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         mapController?.delegate = self
         
         userRepository.fetchAllPois()
-        
-        createPoi()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,18 +74,25 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         if mapController?.isEngineActive == false {
             mapController?.activateEngine()
         }
-    
     }
     
+    // 뷰를 사용하지 않는 상태로 들어갈 때 엔진의 작동을 중지
     override func viewWillDisappear(_ animated: Bool) {
         _appear = false
         mapController?.pauseEngine()
     }
     
+    // 뷰를 아에 메모리에서 내리는 중이라면 옵저버를 삭제하고, 엔진을 아예 새 상태로 리세시킴
     override func viewDidDisappear(_ animated: Bool) {
         removeObservers()
         mapController?.resetEngine()
     }
+    
+    
+    
+    
+    
+    
     
     func authenticationSucceeded() {
         if _auth == false {
@@ -82,14 +103,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             mapController?.activateEngine()
         }
     }
-    //MARK: - Button
-    @objc
-    func touchUpPresentModalButton(_ sender: UIButton) {
-        let vc = RentModalViewcontroller()
-        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        
-        self.present(vc, animated: true, completion: nil)
-    }
+    
     func authenticationFailed(_ errorCode: Int, desc: String) {
         print("error code: \(errorCode)")
         print("desc: \(desc)")
@@ -114,21 +128,27 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         }
     }
     
+    // 지도 생성 메소드
     func addViews() {
-        let defaultPosition = MapPoint(longitude: 127.04460688284246, latitude: 37.50230993921022)
+        print(la, lo)
+        let defaultPosition = MapPoint(longitude: lo, latitude: la)
         let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 2)
         mapController?.addView(mapviewInfo)
     }
+    
+    // 맵 이동 메서드
     func moveCamera(long: Double, lati: Double) {
         let mapView = mapController?.getView("mapview") as! KakaoMap
         let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 3000))
     }
-
+    
+    // 뷰 init
     func viewInit(viewName: String) {
         print("OK")
     }
     
+    // 뷰 추가 성공시 실행할 메서드
     func addViewSucceeded(_ viewName: String, viewInfoName: String) {
         let view = mapController?.getView("mapview") as! KakaoMap
         view.viewRect = mapContainer!.bounds
@@ -137,57 +157,48 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         
         createLabelLayer()
         createPoiStyle()
-        createPoi()
+        // 여기에선 데이터가 있을 때 생성은 된다.
+        createPoi2()
     }
     
+    // 뷰 추가 실패시 실행할 메서드
     func addViewFailed(_ viewName: String, viewInfoName: String) {
         print("Failed")
     }
     
+    //  컨테이너 사이즈 재조정
     func containerDidResized(_ size: CGSize) {
         let mapView = mapController?.getView("mapview") as? KakaoMap
         mapView?.viewRect = CGRect(origin: .zero, size: size)
     }
     
+    // 옵저버 생성 메서드
     func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil) // 앱이 백그라운드 같이 비활성화 될 때 엔진이 멈추게 하는 옵저버를 생성
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil) // 앱이 활성 상태가 되었을 때 엔진을 다시 작동상태로 수정
         _observerAdded = true
     }
     
+    // 옵저버 삭제 메서드
     func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         _observerAdded = false
     }
     
+    // 맵 컨트롤러 어딘가에서 사용할 메서드
     @objc func willResignActive() {
+        // 엔진을 잠시 중단시키는 메서드
         mapController?.pauseEngine()
     }
     
+    // 애도 마찬가지
     @objc func didBecomeActive() {
+        // 엔진을 다시 실행시키는 메서드
         mapController?.activateEngine()
     }
-    //MARK: - Button
-    @objc func btnTapped() {
-        guard let long = locationManager.location?.coordinate.longitude else { return }
-        guard let lati = locationManager.location?.coordinate.latitude else { return }
-        userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
-        moveCamera(long: long, lati: lati)
-        createPoi()
-        var poi = shared.poi!
-        userRepository.createPoi_Data(poi_ID: poi, long: long, lati: lati)
-    }
     
-    @objc func moveToCurrentLocation() {
-        guard let long = locationManager.location?.coordinate.longitude else { return }
-        guard let lati = locationManager.location?.coordinate.latitude else { return }
-        
-        let mapView = mapController?.getView("mapview") as! KakaoMap
-        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 17, mapView: mapView)
-        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
-    }
-    
+    // 오류 발생 시 보여줄 Toast 생성 메서드
     func showToast(_ view: UIView, message: String, duration: TimeInterval = 2.0) {
         let toastLabel = UILabel()
         toastLabel.backgroundColor = UIColor.black
@@ -212,18 +223,46 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             toastLabel.removeFromSuperview()
         }
     }
-    var modalShow = false
-    var mapContainer: KMViewContainer?
-    var mapController: KMController?
-    var shared = UserRepository.shared
-    var _observerAdded: Bool
-    var _auth: Bool
-    var _appear: Bool
-    let locationManager = CLLocationManager()
-
-    let userRepository = UserRepository()
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //버튼 클릭인데 무슨 버튼일까 아마도 위치 가져오는 메서드 일꺼같음
+    @objc func btnTapped() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
+        moveCamera(long: long, lati: lati)
+        // 불러오기를 자동으로 해야되는거고 그 이후 poi 하나만 사용하면 될 부분인거같음
+        createPoi()
+        var poi = shared.poi!
+        userRepository.createPoi_Data(poi_ID: poi, long: long, lati: lati)
+    }
+    
+    // 현 위치로 이동하기 위한 메서드
+    @objc func moveToCurrentLocation() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        
+        let mapView = mapController?.getView("mapview") as! KakaoMap
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 17, mapView: mapView)
+        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
+    }
+    
+    // poi 스타일 정의
     func createPoiStyle() { // 보이는 스타일 정의
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
             return
@@ -235,12 +274,16 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let poiStyle = PoiStyle(styleID: "blue", styles: [perLevelStyle])
         labelManager.addPoiStyle(poiStyle)
     }
+    
+    // poi 라벨 레이어 생성
     func createLabelLayer() { // 레이어생성
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else { return }
         let labelManager = mapView.getLabelManager()
         let layer = LabelLayerOptions(layerID: "poiLayer", competitionType: .none, competitionUnit: .symbolFirst, orderType: .rank, zOrder: 10001)
         let _ = labelManager.addLabelLayer(option: layer)
     }
+    
+    // poi 생성
     func createPoi() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
@@ -257,35 +300,42 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             if let poi = layer.addPoi(option: options, at: position) {
                 shared.poi = poi.itemID
                 poi.clickable = true
-                poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
+                poi.addPoiTappedEventHandler(target: self, handler: KakaoMapVC.poiTappedHandler)
                 poi.show()
             }
         }
     }
     
+    func createPoi2() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        
+        guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
+            return
+        }
+        let labelManager = mapView.getLabelManager()
+        guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
+            return
+        }
+        let mapPoint = MapPoint(longitude: long, latitude: lati)
+        let option = PoiOptions(styleID: "blue", poiID: "createKickboard")
+        if let poi = layer.addPoi(option: option, at: mapPoint) {
+            poi.clickable = true
+            poi.show()
+        }
+    }
+    
+    // poi 클릭시 나올 메서드
     func poiTappedHandler(_ param: PoiInteractionEventParam) {
         print("click!!")
         print(param.poiItem.itemID)
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
         modalShow = true
-        presentModalIfNeeded()
         
     }
     
-    func presentModalIfNeeded() {
-        if modalShow {
-            let modalVC = RentModalViewcontroller()
-            modalVC.modalPresentationStyle = .pageSheet
-            if let sheet = modalVC.sheetPresentationController {
-                sheet.detents = [.medium()]
-                sheet.preferredCornerRadius = 24.0
-            }
-            modalVC.preferredContentSize = CGSize(width: view.frame.width, height: 300)
-            present(modalVC, animated: true, completion: nil)
-        }
-    }
-    
+    // mapview 새로고침
     func reloadMapView() {
         guard let mapContainer = mapContainer else { return }
         
@@ -308,47 +358,16 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         createPoiStyle()
         createPoi()
     }
+    
 }
-extension KakaoMapViewController {
-    //MARK: - 워치 관련
+
+extension KakaoMapVC: CLLocationManagerDelegate {
+    // CoreLocation
     private func setLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-    private func setNavigation() {
-        //MARK: - 커스텀 NavigationBar Left Item
-        let buttonContainer = UIView()
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "currentLocation"), for: .normal)
-        button.addTarget(self, action: #selector(moveToCurrentLocation), for: .touchUpInside)
-        
-        buttonContainer.addSubview(button)
-        button.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(5)
-        }
-        
-        buttonContainer.snp.makeConstraints {
-            $0.width.equalTo(40)
-            $0.height.equalTo(40)
-        }
-        
-        let currentLocation = UIBarButtonItem(customView: buttonContainer)
-        
-        navigationItem.leftBarButtonItem = currentLocation
-        
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
-            NSAttributedString.Key.foregroundColor: UIColor.black
-        ]
-        let addButton = UIBarButtonItem(title: "불러오기", style: .plain, target: self, action: #selector(btnTapped))
-        addButton.tintColor = UIColor.gray
-        navigationItem.rightBarButtonItem = addButton
-    }
-    
-}
-
-extension KakaoMapViewController: CLLocationManagerDelegate {
     
     func getLocationUsagePermission() {
         self.locationManager.requestWhenInUseAuthorization()
@@ -379,7 +398,15 @@ extension KakaoMapViewController: CLLocationManagerDelegate {
         }
         
     }
-}
-#Preview {
-    return KakaoMapViewController()
+    func locationSetting() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        
+        //manager.addPositions(long: long, lati: lati)
+        
+        print(long)
+        print(lati)
+        lo = long
+        la = lati
+    }
 }

@@ -16,6 +16,7 @@
 		4F39BE6F2C50BEC800BB7B6C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F39BE6E2C50BEC800BB7B6C /* FirebaseFirestore */; };
 		4F39BE712C50C79E00BB7B6C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE702C50C79E00BB7B6C /* UserModel.swift */; };
 		4F39BE742C51139F00BB7B6C /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE732C51139F00BB7B6C /* UserRepository.swift */; };
+		A2791E862C53B14D00E0505F /* KakaoMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2791E852C53B14D00E0505F /* KakaoMapVC.swift */; };
 		A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041FE2C4F390F00722F48 /* AppDelegate.swift */; };
 		A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042002C4F390F00722F48 /* SceneDelegate.swift */; };
 		A2F042082C4F391100722F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F042072C4F391100722F48 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F39BE702C50C79E00BB7B6C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = kickBoardProject/controller/UserModel.swift; sourceTree = SOURCE_ROOT; };
 		4F39BE732C51139F00BB7B6C /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		A2791E852C53B14D00E0505F /* KakaoMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapVC.swift; sourceTree = "<group>"; };
 		A2F041FB2C4F390F00722F48 /* kickBoardProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kickBoardProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F041FE2C4F390F00722F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2F042002C4F390F00722F48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,7 +142,6 @@
 		A2F042162C4F3E6500722F48 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				F4BB0F362C521F6C00BC6742 /* MyPageView.swift */,
 				F4BB0F342C521F5D00BC6742 /* AddedKickboardCell.swift */,
 				4F39BE602C4F3FD400BB7B6C /* LoginView.swift */,
 				4F39BE642C4F702000BB7B6C /* CreateUserView.swift */,
@@ -159,8 +160,10 @@
 				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
 				F468EB9F2C4F837E00BC9766 /* TabBarController.swift */,
 				A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */,
+				F4BB0F362C521F6C00BC6742 /* MyPageView.swift */,
 				F4BB0F382C521F9A00BC6742 /* MyPageViewController.swift */,
 				AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */,
+				A2791E852C53B14D00E0505F /* KakaoMapVC.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				F4BB0F392C521F9A00BC6742 /* MyPageViewController.swift in Sources */,
 				4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */,
 				4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */,
+				A2791E862C53B14D00E0505F /* KakaoMapVC.swift in Sources */,
 				F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */,
 				F4BB0F372C521F6C00BC6742 /* MyPageView.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,

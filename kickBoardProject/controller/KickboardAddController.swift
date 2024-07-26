@@ -18,7 +18,7 @@ class KickboardAddController: UIViewController {
     var mapController: KMController?
     var la: Double!
     var lo: Double!
-    let kakaoMapVC = KakaoMapViewController()
+    let kakaoMapVC = KakaoMapVC()
     
     let kickBoardAddView = KickBoardAddView()
     
@@ -43,8 +43,6 @@ class KickboardAddController: UIViewController {
         
         print(long)
         print(lati)
-        
-        kakaoMapVC.createPoi()
         
         kakaoMapVC.moveCamera(long: long, lati: lati)
     }
@@ -74,16 +72,24 @@ extension KickboardAddController {
     }
     
     private func setNavigation() {
-        title = "지도"
+        title = "킥보드 추가"
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.black
         ]
-//                let addButton = UIBarButtonItem(title: "불러오기", style: .plain, target: self, action: #selector(btnTapped))
-//                addButton.tintColor = UIColor.gray
-//                navigationItem.rightBarButtonItem = addButton
-        
+        let addButton = UIBarButtonItem(title: "추가하기", style: .plain, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
     }
+    
+    @objc
+    private func addButtonTapped() {
+        // 킥보드 추가 버튼 클릭
+        print("데이터 추가")
+        kickBoardAddView.resetId()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+    
 }
 
 extension KickboardAddController: CLLocationManagerDelegate {

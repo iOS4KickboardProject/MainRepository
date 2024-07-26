@@ -16,7 +16,7 @@ class KickBoardAddView: UIView {
     var mapView = UIView()
     let reloadButton = UIButton()
     let data = ["100%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", "0%"]
-    let id = idSetting()
+    var id = idSetting()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,6 +88,11 @@ class KickBoardAddView: UIView {
             }
         }
         return uuid
+    }
+    
+    func resetId() {
+        id = KickBoardAddView.idSetting()
+        kickBoardIdLabel.text = "킥보드 ID : \(id)"
     }
     
     @objc func donePicker() {
