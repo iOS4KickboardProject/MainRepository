@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  kickBoardProject
 //
-//  Created by 이득령 on 7/23/24.
+//  Created by 이득령 on 7/23/24
 ///
 
 import UIKit
@@ -83,20 +83,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         }
     }
     //MARK: - Button
-    @objc func btnTapped() {
-        
-        guard let long = locationManager.location?.coordinate.longitude else { return }
-        guard let lati = locationManager.location?.coordinate.latitude else { return }
-        
-        userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
-        moveCamera(long: long, lati: lati)
-        
-        createPoi()
-        var poi = manager.poi!
-        userRepository.createPoi_Data(poi_ID: poi, long: long, lati: lati)
-        
-    }
-    
     @objc
     func touchUpPresentModalButton(_ sender: UIButton) {
         let vc = RentModalViewcontroller()
