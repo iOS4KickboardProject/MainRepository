@@ -129,8 +129,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     }
     
     func addViews() {
-        let defaultPosition = MapPoint(longitude: 126.964540921, latitude: 37.529521713)
-        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 3)
+        let defaultPosition = MapPoint(longitude: 127.04460688284246, latitude: 37.50230993921022)
+        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 2)
         mapController?.addView(mapviewInfo)
     }
     func moveCamera(long: Double, lati: Double) {
