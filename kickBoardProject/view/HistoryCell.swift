@@ -13,12 +13,14 @@ class HistoryCell: UITableViewCell {
     let kickboardNameLabel: UILabel = {
         let label = UILabel()
         label.text = "some random kickboard"
+        label.textColor = .black
         return label
     }()
     
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "7월 25일 2024년"
+        label.textColor = .black
         return label
     }()
     
@@ -32,6 +34,7 @@ class HistoryCell: UITableViewCell {
     }
     
     func configureUI() {
+        self.backgroundColor = .white
         [kickboardNameLabel, dateLabel].forEach {
             self.addSubview($0)
         }

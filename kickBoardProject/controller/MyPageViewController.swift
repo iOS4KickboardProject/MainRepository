@@ -34,7 +34,7 @@ class MyPageViewController: UIViewController {
         myPageView.historyTableView.dataSource = self
         myPageView.historyTableView.delegate = self
     }
-    
+    //네비게이션 세팅: 타이틀 : 유저네임
     func setNav() {
         self.navigationItem.title = UserModel.shared.getUser().name
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -44,6 +44,7 @@ class MyPageViewController: UIViewController {
         navigationItem.rightBarButtonItem = logoutButton
     }
     
+    //배터리 이미지 0 25 50 75 100에 맞춰 변경
     func setBatteryImage(percent: Int) -> UIImage {
         switch percent {
         case 0...24:
@@ -65,7 +66,7 @@ class MyPageViewController: UIViewController {
     func logoutTapped() {
         logoutAlert()
     }
-    
+    //로그아웃 버튼 터치시 나오는 알럿
     func logoutAlert(){
         let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니가?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "네", style: .default) { action in

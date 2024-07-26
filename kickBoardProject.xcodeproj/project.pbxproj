@@ -26,7 +26,8 @@
 		A2F042202C50D04300722F48 /* Kickboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0421F2C50D04300722F48 /* Kickboard.swift */; };
 		AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */; };
 		AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */; };
-		AF68D8642C525B5A00489DF6 /* ModelViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D8632C525B5A00489DF6 /* ModelViewcontroller.swift */; };
+		AF68D8642C525B5A00489DF6 /* RentModalViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */; };
+		F40439D42C538AF200E28B77 /* RentModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40439D32C538AF200E28B77 /* RentModalView.swift */; };
 		F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB9F2C4F837E00BC9766 /* TabBarController.swift */; };
 		F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EBA12C4F88CF00BC9766 /* empty.swift */; };
 		F4BB0F352C521F5D00BC6742 /* AddedKickboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB0F342C521F5D00BC6742 /* AddedKickboardCell.swift */; };
@@ -53,7 +54,8 @@
 		A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardAddController.swift; sourceTree = "<group>"; };
 		A2F0421F2C50D04300722F48 /* Kickboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kickboard.swift; path = kickBoardProject/view/Kickboard.swift; sourceTree = SOURCE_ROOT; };
 		AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
-		AF68D8632C525B5A00489DF6 /* ModelViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewcontroller.swift; sourceTree = "<group>"; };
+		AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentModalViewcontroller.swift; sourceTree = "<group>"; };
+		F40439D32C538AF200E28B77 /* RentModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentModalView.swift; sourceTree = "<group>"; };
 		F468EB9F2C4F837E00BC9766 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/controller/empty.swift; sourceTree = SOURCE_ROOT; };
 		F4BB0F342C521F5D00BC6742 /* AddedKickboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddedKickboardCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				4F39BE642C4F702000BB7B6C /* CreateUserView.swift */,
 				A2F042192C4F401900722F48 /* KickBoardAddView.swift */,
 				F4BB0F3A2C523CB200BC6742 /* HistoryCell.swift */,
+				F40439D32C538AF200E28B77 /* RentModalView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -157,7 +160,7 @@
 				F468EB9F2C4F837E00BC9766 /* TabBarController.swift */,
 				A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */,
 				F4BB0F382C521F9A00BC6742 /* MyPageViewController.swift */,
-				AF68D8632C525B5A00489DF6 /* ModelViewcontroller.swift */,
+				AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -264,10 +267,11 @@
 				4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
 				F4BB0F3B2C523CB200BC6742 /* HistoryCell.swift in Sources */,
+				F40439D42C538AF200E28B77 /* RentModalView.swift in Sources */,
 				4F39BE742C51139F00BB7B6C /* UserRepository.swift in Sources */,
 				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
 				AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */,
-				AF68D8642C525B5A00489DF6 /* ModelViewcontroller.swift in Sources */,
+				AF68D8642C525B5A00489DF6 /* RentModalViewcontroller.swift in Sources */,
 				F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */,
 				A2F0421C2C4F8DD300722F48 /* KickboardAddController.swift in Sources */,
 				A2F042202C50D04300722F48 /* Kickboard.swift in Sources */,

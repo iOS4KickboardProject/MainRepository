@@ -98,7 +98,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     @objc
     func touchUpPresentModalButton(_ sender: UIButton) {
-        let vc = ModelViewcontroller()
+        let vc = RentModalViewcontroller()
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         
         self.present(vc, animated: true, completion: nil)
@@ -272,7 +272,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     func presentModalIfNeeded() {
         if modalShow {
-            let modalVC = ModelViewcontroller()
+            let modalVC = RentModalViewcontroller()
             modalVC.modalPresentationStyle = .pageSheet
             if let sheet = modalVC.sheetPresentationController {
                 sheet.detents = [.medium()]
