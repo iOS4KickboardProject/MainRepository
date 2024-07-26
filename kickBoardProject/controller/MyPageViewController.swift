@@ -63,8 +63,20 @@ class MyPageViewController: UIViewController {
     
     @objc
     func logoutTapped() {
-        guard let backVC = self.tabBarController?.navigationController else { return }
-        backVC.popToRootViewController(animated: true)
+        logoutAlert()
+    }
+    
+    func logoutAlert(){
+        let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니가?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "네", style: .default) { action in
+            guard let backVC = self.tabBarController?.navigationController else { return }
+            backVC.popToRootViewController(animated: true)
+            UserDefaults.standard.setValue("N", forKey: "autoLoginYn")
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 

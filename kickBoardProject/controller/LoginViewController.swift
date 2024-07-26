@@ -31,7 +31,6 @@ class LoginViewController: UIViewController{
     func retrieveAutoLogin(){
         let autoLoginYn = UserDefaults.standard.string(forKey: "autoLoginYn")
         guard let autoLoginYn = autoLoginYn else {
-            print(autoLoginYn)
             setAction()
             return
         }
