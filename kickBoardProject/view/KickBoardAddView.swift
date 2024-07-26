@@ -15,7 +15,7 @@ class KickBoardAddView: UIView {
     let pickerView = UIPickerView()
     var mapView = UIView()
     let reloadButton = UIButton()
-    let data = ["100%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", "0%"]
+    let data = ["100", "90", "80", "70", "60", "50", "40", "30", "20", "10", "0"]
     var id = idSetting()
     var battery = ""
     
@@ -168,7 +168,7 @@ extension KickBoardAddView: UIPickerViewDelegate, UIPickerViewDataSource {
 
     // UIPickerViewDelegate 메소드
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
+        return "\(data[row])%"
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

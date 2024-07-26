@@ -13,7 +13,7 @@ class KickboardRepository {
     static let shared = KickboardRepository()
     
     func fetchKickboardInfos() {
-        db.collection("kickboardInfo").getDocuments { (querySnapshot, error) in
+        db.collection("kickboardInfo").getDocuments(source: .server) { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -29,7 +29,7 @@ class KickboardRepository {
     }
     
     func addKickboardInfo(_ kickboardInfo: KickboardStruct) {
-        db.collection("kickboardInfo").addDocument(data: kickboardInfo.dictionary) { error in
+        db.collection("kickboardInfo").document(kickboardInfo.id).setData(kickboardInfo.dictionary) { error in
             if let error = error {
                 print("Error adding document: \(error)")
                 NotificationCenter.default.post(name: .didAddKickboardInfo, object: nil, userInfo: ["success": false])
