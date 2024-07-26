@@ -133,10 +133,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             let deleteAction = UIContextualAction(style: .destructive, title: "삭제하기") { (action, view, success ) in
 //                self.kickBoardItems.remove(at: indexPath.row)
                 KickBoard.shared.deleteKickBoard(id: self.myKickBoards[indexPath.row].id)
-                self.reloadData()
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                    self.reloadData()
+                }
+//                tableView.deleteRows(at: [indexPath], with: .fade)
                 // 내 킥보드 삭제하는 코드
-                
             }
             let config = UISwipeActionsConfiguration(actions: [deleteAction])
             config.performsFirstActionWithFullSwipe = false

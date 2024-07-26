@@ -66,6 +66,7 @@ class KickBoard {
            let id = notification.userInfo?["id"] as? String {
             // 삭제 성공 시, 로컬 데이터도 업데이트
             self.kickBoards.removeAll { $0.id == id }
+            //KickboardRepository.shared.fetchKickboardInfos()
             print("Kickboard deleted successfully")
         } else {
             print("Failed to delete kickboard")
