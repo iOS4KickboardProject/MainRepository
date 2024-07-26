@@ -11,7 +11,8 @@ import UIKit
 class ModelViewcontroller: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
+        view.backgroundColor = .white
     }
 
 }
