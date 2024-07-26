@@ -82,6 +82,28 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             mapController?.activateEngine()
         }
     }
+    //MARK: - Button
+    @objc func btnTapped() {
+        
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        
+        userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
+        moveCamera(long: long, lati: lati)
+        
+        createPoi()
+        var poi = manager.poi!
+        userRepository.createPoi_Data(poi_ID: poi, long: long, lati: lati)
+        
+    }
+    
+    @objc
+    func touchUpPresentModalButton(_ sender: UIButton) {
+        let vc = RentModalViewcontroller()
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
+        self.present(vc, animated: true, completion: nil)
+    }
     func authenticationFailed(_ errorCode: Int, desc: String) {
         print("error code: \(errorCode)")
         print("desc: \(desc)")
@@ -182,7 +204,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     @objc
     func touchUpPresentModalButton(_ sender: UIButton) {
-        let vc = ModelViewcontroller()
+        let vc = RentModalViewcontroller()
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.present(vc, animated: true, completion: nil)
     }
@@ -274,7 +296,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     func presentModalIfNeeded() {
         if modalShow {
-            let modalVC = ModelViewcontroller()
+            let modalVC = RentModalViewcontroller()
             modalVC.modalPresentationStyle = .pageSheet
             if let sheet = modalVC.sheetPresentationController {
                 sheet.detents = [.medium()]

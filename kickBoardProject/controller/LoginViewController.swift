@@ -23,6 +23,10 @@ class LoginViewController: UIViewController{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
     func retrieveAutoLogin(){
         let autoLoginYn = UserDefaults.standard.string(forKey: "autoLoginYn")
@@ -35,6 +39,7 @@ class LoginViewController: UIViewController{
             userRepository.retrieveUserData(email: email){ [weak self] user in
                 guard let self = self else { return }
                 self.user = user
+                UserModel.shared.fetchUser(user: self.user)
                 Pushtabbar()
             }
             
@@ -99,9 +104,9 @@ class LoginViewController: UIViewController{
         userRepository.retrieveUserData(email: loginView.emailTextField.text!){ [weak self] user in
             guard let self = self else { return }
             self.user = user
-
             if let user = user, user.email == loginView.emailTextField.text!, user.pwd == loginView.pwdTextField.text! {
                 self.Pushtabbar()
+                UserModel.shared.fetchUser(user: user)
             } else {
                 showAlert(message: "로그인 정보를 다시 확인 해주세요.")
             }

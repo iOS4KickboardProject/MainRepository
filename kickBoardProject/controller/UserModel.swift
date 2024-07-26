@@ -10,8 +10,14 @@ class UserModel{
     static let shared = UserModel()
     private var user = UserStruct()
 
+    let userRepository = UserRepository()
+
     private init() {
         
+    }
+    
+    func fetchUser(user: UserStruct) {
+        self.user = user
     }
     
     func updateUser(data: [String: Any]) {
@@ -20,6 +26,7 @@ class UserModel{
         user.name = data["name"] as? String
         user.pwd = data["pwd"] as? String
     }
+    
     func getUser() -> UserStruct {
         return user
     }
