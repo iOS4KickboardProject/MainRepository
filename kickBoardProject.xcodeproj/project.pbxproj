@@ -11,6 +11,13 @@
 		4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE602C4F3FD400BB7B6C /* LoginView.swift */; };
 		4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */; };
 		4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE642C4F702000BB7B6C /* CreateUserView.swift */; };
+		4F39BE692C5099A200BB7B6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */; };
+		4F39BE6C2C50B65100BB7B6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4F39BE6B2C50B65100BB7B6C /* FirebaseAnalytics */; };
+		4F39BE6F2C50BEC800BB7B6C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F39BE6E2C50BEC800BB7B6C /* FirebaseFirestore */; };
+		4F39BE712C50C79E00BB7B6C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE702C50C79E00BB7B6C /* UserModel.swift */; };
+		4F39BE742C51139F00BB7B6C /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE732C51139F00BB7B6C /* UserRepository.swift */; };
+		A2791E862C53B14D00E0505F /* KakaoMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2791E852C53B14D00E0505F /* KakaoMapVC.swift */; };
+		A2791E882C53D15D00E0505F /* KickboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2791E872C53D15D00E0505F /* KickboardRepository.swift */; };
 		A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041FE2C4F390F00722F48 /* AppDelegate.swift */; };
 		A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042002C4F390F00722F48 /* SceneDelegate.swift */; };
 		A2F042082C4F391100722F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F042072C4F391100722F48 /* Assets.xcassets */; };
@@ -18,12 +25,17 @@
 		A2F042142C4F397300722F48 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2F042132C4F397300722F48 /* SnapKit */; };
 		A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042192C4F401900722F48 /* KickBoardAddView.swift */; };
 		A2F0421C2C4F8DD300722F48 /* KickboardAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */; };
+		A2F042202C50D04300722F48 /* Kickboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F0421F2C50D04300722F48 /* Kickboard.swift */; };
 		AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */; };
 		AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */; };
-		AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1623262C4F76BA00861F3A /* MainViewController.swift */; };
-		F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */; };
+		AF68D8642C525B5A00489DF6 /* RentModalViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */; };
+		F40439D42C538AF200E28B77 /* RentModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40439D32C538AF200E28B77 /* RentModalView.swift */; };
 		F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EB9F2C4F837E00BC9766 /* TabBarController.swift */; };
 		F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468EBA12C4F88CF00BC9766 /* empty.swift */; };
+		F4BB0F352C521F5D00BC6742 /* AddedKickboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB0F342C521F5D00BC6742 /* AddedKickboardCell.swift */; };
+		F4BB0F372C521F6C00BC6742 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB0F362C521F6C00BC6742 /* MyPageView.swift */; };
+		F4BB0F392C521F9A00BC6742 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB0F382C521F9A00BC6742 /* MyPageViewController.swift */; };
+		F4BB0F3B2C523CB200BC6742 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB0F3A2C523CB200BC6742 /* HistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +43,11 @@
 		4F39BE602C4F3FD400BB7B6C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = kickBoardProject/controller/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		4F39BE642C4F702000BB7B6C /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUserView.swift; path = kickBoardProject/controller/CreateUserView.swift; sourceTree = SOURCE_ROOT; };
+		4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4F39BE702C50C79E00BB7B6C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = kickBoardProject/controller/UserModel.swift; sourceTree = SOURCE_ROOT; };
+		4F39BE732C51139F00BB7B6C /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		A2791E852C53B14D00E0505F /* KakaoMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapVC.swift; sourceTree = "<group>"; };
+		A2791E872C53D15D00E0505F /* KickboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardRepository.swift; sourceTree = "<group>"; };
 		A2F041FB2C4F390F00722F48 /* kickBoardProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kickBoardProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F041FE2C4F390F00722F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2F042002C4F390F00722F48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,11 +56,16 @@
 		A2F0420C2C4F391100722F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2F042192C4F401900722F48 /* KickBoardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAddView.swift; sourceTree = "<group>"; };
 		A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardAddController.swift; sourceTree = "<group>"; };
+		A2F0421F2C50D04300722F48 /* Kickboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kickboard.swift; path = kickBoardProject/view/Kickboard.swift; sourceTree = SOURCE_ROOT; };
 		AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
-		AF1623262C4F76BA00861F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentModalViewcontroller.swift; sourceTree = "<group>"; };
+		F40439D32C538AF200E28B77 /* RentModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentModalView.swift; sourceTree = "<group>"; };
 		F468EB9F2C4F837E00BC9766 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F468EBA12C4F88CF00BC9766 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = empty.swift; path = kickBoardProject/controller/empty.swift; sourceTree = SOURCE_ROOT; };
+		F4BB0F342C521F5D00BC6742 /* AddedKickboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddedKickboardCell.swift; sourceTree = "<group>"; };
+		F4BB0F362C521F6C00BC6742 /* MyPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		F4BB0F382C521F9A00BC6742 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		F4BB0F3A2C523CB200BC6742 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,18 +74,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F042142C4F397300722F48 /* SnapKit in Frameworks */,
+				4F39BE6F2C50BEC800BB7B6C /* FirebaseFirestore in Frameworks */,
 				AF1623222C4F4BD000861F3A /* KakaoMapsSDK-SPM in Frameworks */,
+				4F39BE6C2C50B65100BB7B6C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F39BE6D2C50BEC800BB7B6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F39BE722C51132400BB7B6C /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				4F39BE732C51139F00BB7B6C /* UserRepository.swift */,
+				A2791E872C53D15D00E0505F /* KickboardRepository.swift */,
+			);
+			path = repository;
+			sourceTree = "<group>";
+		};
 		A2F041F22C4F390F00722F48 = {
 			isa = PBXGroup;
 			children = (
 				A2F041FD2C4F390F00722F48 /* kickBoardProject */,
 				A2F041FC2C4F390F00722F48 /* Products */,
+				4F39BE6D2C50BEC800BB7B6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,11 +119,13 @@
 		A2F041FD2C4F390F00722F48 /* kickBoardProject */ = {
 			isa = PBXGroup;
 			children = (
+				4F39BE722C51132400BB7B6C /* repository */,
 				A2F042182C4F3E7900722F48 /* config */,
 				A2F042172C4F3E6C00722F48 /* controller */,
 				A2F042162C4F3E6500722F48 /* view */,
 				A2F042152C4F3E5F00722F48 /* model */,
 				A2F042072C4F391100722F48 /* Assets.xcassets */,
+				4F39BE682C5099A200BB7B6C /* GoogleService-Info.plist */,
 				A2F042092C4F391100722F48 /* LaunchScreen.storyboard */,
 				A2F0420C2C4F391100722F48 /* Info.plist */,
 			);
@@ -93,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				F468EBA12C4F88CF00BC9766 /* empty.swift */,
+				A2F0421F2C50D04300722F48 /* Kickboard.swift */,
+				4F39BE702C50C79E00BB7B6C /* UserModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -100,9 +145,12 @@
 		A2F042162C4F3E6500722F48 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				F4BB0F342C521F5D00BC6742 /* AddedKickboardCell.swift */,
 				4F39BE602C4F3FD400BB7B6C /* LoginView.swift */,
 				4F39BE642C4F702000BB7B6C /* CreateUserView.swift */,
 				A2F042192C4F401900722F48 /* KickBoardAddView.swift */,
+				F4BB0F3A2C523CB200BC6742 /* HistoryCell.swift */,
+				F40439D32C538AF200E28B77 /* RentModalView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -113,10 +161,12 @@
 				4F39BE5E2C4F3FC400BB7B6C /* LoginViewController.swift */,
 				4F39BE622C4F6D6600BB7B6C /* CreateUserViewController.swift */,
 				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
-				AF1623262C4F76BA00861F3A /* MainViewController.swift */,
 				F468EB9F2C4F837E00BC9766 /* TabBarController.swift */,
-				F468EB952C4F4F8100BC9766 /* MyPageViewController.swift */,
 				A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */,
+				F4BB0F362C521F6C00BC6742 /* MyPageView.swift */,
+				F4BB0F382C521F9A00BC6742 /* MyPageViewController.swift */,
+				AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */,
+				A2791E852C53B14D00E0505F /* KakaoMapVC.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -149,6 +199,8 @@
 			packageProductDependencies = (
 				A2F042132C4F397300722F48 /* SnapKit */,
 				AF1623212C4F4BD000861F3A /* KakaoMapsSDK-SPM */,
+				4F39BE6B2C50B65100BB7B6C /* FirebaseAnalytics */,
+				4F39BE6E2C50BEC800BB7B6C /* FirebaseFirestore */,
 			);
 			productName = kickBoardProject;
 			productReference = A2F041FB2C4F390F00722F48 /* kickBoardProject.app */;
@@ -181,6 +233,7 @@
 			packageReferences = (
 				A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AF1623202C4F4BD000861F3A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
+				4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A2F041FC2C4F390F00722F48 /* Products */;
 			projectDirPath = "";
@@ -198,6 +251,7 @@
 			files = (
 				A2F042082C4F391100722F48 /* Assets.xcassets in Resources */,
 				A2F0420B2C4F391100722F48 /* Base in Resources */,
+				4F39BE692C5099A200BB7B6C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,18 +262,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4BB0F352C521F5D00BC6742 /* AddedKickboardCell.swift in Sources */,
+				F4BB0F392C521F9A00BC6742 /* MyPageViewController.swift in Sources */,
 				4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */,
 				4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */,
-				F468EB962C4F4F8100BC9766 /* MyPageViewController.swift in Sources */,
+				A2791E862C53B14D00E0505F /* KakaoMapVC.swift in Sources */,
 				F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */,
+				F4BB0F372C521F6C00BC6742 /* MyPageView.swift in Sources */,
 				A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */,
+				4F39BE712C50C79E00BB7B6C /* UserModel.swift in Sources */,
 				4F39BE612C4F3FD400BB7B6C /* LoginView.swift in Sources */,
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
+				F4BB0F3B2C523CB200BC6742 /* HistoryCell.swift in Sources */,
+				F40439D42C538AF200E28B77 /* RentModalView.swift in Sources */,
+				4F39BE742C51139F00BB7B6C /* UserRepository.swift in Sources */,
+				A2791E882C53D15D00E0505F /* KickboardRepository.swift in Sources */,
 				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
 				AF1623242C4F4DFE00861F3A /* KakaoMapViewController.swift in Sources */,
+				AF68D8642C525B5A00489DF6 /* RentModalViewcontroller.swift in Sources */,
 				F468EBA22C4F88CF00BC9766 /* empty.swift in Sources */,
-				AF1623272C4F76BA00861F3A /* MainViewController.swift in Sources */,
 				A2F0421C2C4F8DD300722F48 /* KickboardAddController.swift in Sources */,
+				A2F042202C50D04300722F48 /* Kickboard.swift in Sources */,
 				A2F0421A2C4F401900722F48 /* KickBoardAddView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,7 +427,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4DWV94Z6J6;
+				DEVELOPMENT_TEAM = 72GVCX2P2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -391,7 +454,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4DWV94Z6J6;
+				DEVELOPMENT_TEAM = 72GVCX2P2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kickBoardProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -435,6 +498,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.29.0;
+			};
+		};
 		A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -454,6 +525,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4F39BE6B2C50B65100BB7B6C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		4F39BE6E2C50BEC800BB7B6C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F39BE6A2C50B65100BB7B6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		A2F042132C4F397300722F48 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2F042122C4F397300722F48 /* XCRemoteSwiftPackageReference "SnapKit" */;

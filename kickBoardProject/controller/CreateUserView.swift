@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 import SnapKit
+protocol CreateUserViewDelegate: AnyObject {
+    func showAlert(message: String)
+}
 class CreateUserView: UIView{
+    private var currentIndex = 0
+    weak var delegate: CreateUserViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -44,7 +49,7 @@ class CreateUserView: UIView{
     let pwdLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
-        
+        label.isHidden = true
         return label
     }()
     
@@ -53,16 +58,19 @@ class CreateUserView: UIView{
         textField.borderStyle = .none
         textField.placeholder = "비밀번호"
         textField.isSecureTextEntry = true
+        textField.isHidden = true
         return textField
     }()
     let pwdTextFieldLine: UIView = {
         let uiView = UIView()
         uiView.backgroundColor = .black
+        uiView.isHidden = true
         return uiView
     }()
     let pwdCheckLabel: UILabel = {
         let label = UILabel()
         label.text = "Password Check"
+        label.isHidden = true
         return label
     }()
     
@@ -71,17 +79,20 @@ class CreateUserView: UIView{
         textField.borderStyle = .none
         textField.placeholder = "비밀번호 확인"
         textField.isSecureTextEntry = true
+        textField.isHidden = true
         return textField
     }()
     let pwdCheckTextFieldLine: UIView = {
         let uiView = UIView()
         uiView.backgroundColor = .black
+        uiView.isHidden = true
         return uiView
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
+        label.isHidden = true
         return label
     }()
     
@@ -89,16 +100,43 @@ class CreateUserView: UIView{
         let textField = UITextField()
         textField.borderStyle = .none
         textField.placeholder = "이름"
+        textField.isHidden = true
         return textField
     }()
     let nameTextFieldLine: UIView = {
         let uiView = UIView()
         uiView.backgroundColor = .black
+        uiView.isHidden = true
         return uiView
     }()
+    let nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("다음", for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(tappedNextButton), for: .touchDown)
+        return button
+    }()
+    let createButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("계정생성", for: .normal)
+        button.backgroundColor = .black
+        button.isHidden = true
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissKeyboard() {
+        endEditing(true)
+    }
     func setupView(){
         backgroundColor = .white
-        [joinLabel, emailLabel, emailTextField, emailTextFieldLine, pwdLabel, pwdTextField, pwdTextFieldLine, pwdCheckLabel, pwdCheckTextField, pwdCheckTextFieldLine, nameLabel,nameTextField, nameTextFieldLine].forEach { addSubview($0) }
+        setupTapGesture()
+        [joinLabel, emailLabel, emailTextField, emailTextFieldLine, pwdLabel, pwdTextField, pwdTextFieldLine, pwdCheckLabel, pwdCheckTextField, pwdCheckTextFieldLine, nameLabel,nameTextField, nameTextFieldLine, nextButton, createButton].forEach { addSubview($0) }
         
         joinLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
@@ -168,5 +206,77 @@ class CreateUserView: UIView{
             $0.trailing.equalTo(nameTextField.snp.trailing)
             $0.height.equalTo(1)
         }
+        nextButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalTo(emailTextFieldLine.snp.bottom).offset(20)
+        }
     }
+    @objc func tappedNextButton() {
+        if currentIndex == 0 && emailTextField.text!.isEmpty{
+            delegate?.showAlert(message: "이메일을 입력해 주세요")
+            return
+        }
+        
+        if currentIndex == 1 && pwdTextField.text!.isEmpty{
+            delegate?.showAlert(message: "비밀번호를 입력해 주세요")
+            return
+        }
+        if currentIndex == 2 && pwdCheckTextField.text!.isEmpty{
+            delegate?.showAlert(message: "비밀번호 확인 부분을 입력해 주세요")
+            return
+        }
+        if currentIndex == 2 && pwdCheckTextField.text! != pwdTextField.text!{
+            delegate?.showAlert(message: "비밀번호를 다시 한번 확인해 주세요")
+            return
+        }
+        
+        setPositionNextButton()
+        
+    }
+    private func positionNextButton(index: Int){
+        if index < 2{
+            nextButton.snp.remakeConstraints {
+                $0.leading.equalToSuperview().offset(20)
+                $0.trailing.equalToSuperview().offset(-20)
+                
+                switch index {
+                    case 0:
+                        
+                        $0.top.equalTo(pwdTextFieldLine.snp.bottom).offset(20)
+                    case 1:
+                        $0.top.equalTo(pwdCheckTextFieldLine.snp.bottom).offset(20)
+                    default:
+                        $0.top.equalToSuperview().offset(20)
+                }
+            }
+        }else{
+            nextButton.isHidden = true
+            createButton.isHidden = false
+            createButton.snp.makeConstraints {
+                $0.bottom.equalToSuperview().offset(-50)
+                $0.leading.equalToSuperview().offset(20)
+                $0.trailing.equalToSuperview().offset(-20)
+                $0.height.equalTo(40)
+            }
+        }
+        layoutSubviews()
+    }
+    func setPositionNextButton(){
+        let elements: [(UILabel, UITextField, UIView)] = [
+            (pwdLabel, pwdTextField, pwdTextFieldLine),
+            (pwdCheckLabel, pwdCheckTextField, pwdCheckTextFieldLine),
+            (nameLabel, nameTextField, nameTextFieldLine)
+        ]
+        
+        if currentIndex < elements.count {
+            let (label, textField, line) = elements[currentIndex]
+            label.isHidden = false
+            textField.isHidden = false
+            line.isHidden = false
+            positionNextButton(index: currentIndex)
+            currentIndex += 1
+        }
+    }
+    
 }

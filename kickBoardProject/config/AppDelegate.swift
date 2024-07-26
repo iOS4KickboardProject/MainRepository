@@ -1,5 +1,6 @@
 import UIKit
 import KakaoMapsSDK
+import FirebaseCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -9,7 +10,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Kakao 인증
         SDKInitializer.InitSDK(appKey: "7d630328045e92ea340b5304658df041")
-        
+        //FireBase연결
+        FirebaseApp.configure()
         return true
     }
 
