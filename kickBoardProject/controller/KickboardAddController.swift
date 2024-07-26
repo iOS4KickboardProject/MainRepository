@@ -27,6 +27,7 @@ class KickboardAddController: UIViewController {
         setupView()
         setLocation()
         setNavigation()
+        locationSetting2()
         view = kickBoardAddView
         kickBoardAddView.reloadButton.addTarget(self, action: #selector(btnTapped), for: .touchUpInside)
     }
@@ -38,13 +39,9 @@ class KickboardAddController: UIViewController {
     func locationSetting() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
-        
-        //manager.addPositions(long: long, lati: lati)
-        
-        print(long)
-        print(lati)
-        
-        kakaoMapVC.moveCamera(long: long, lati: lati)
+        la = lati
+        lo = long
+        kakaoMapVC.btnTapped()
     }
     
     @objc func btnTapped() {
@@ -84,7 +81,24 @@ extension KickboardAddController {
     @objc
     private func addButtonTapped() {
         // 킥보드 추가 버튼 클릭
-        print("데이터 추가")
+        guard let email = UserModel.shared.getUser().email else {
+            print("유저 이메일 없음")
+            return
+        }
+        let battery = kickBoardAddView.battery
+        if battery == "" {
+            print("배터리 정보 이상")
+            return
+        }
+        
+        let newKickboard = KickboardStruct(dictionary: ["battery": kickBoardAddView.battery, "id": kickBoardAddView.id, "latitude": String(la), "longitude": String(lo), "status": "N", "userEmail": email])
+        
+        if let kickboard = newKickboard {
+            KickBoard.shared.addKickBoard(kickboard)
+            print("데이터 추가")
+        } else {
+            print("데이터 추가 실패")
+        }
         kickBoardAddView.resetId()
         view.setNeedsLayout()
         view.layoutIfNeeded()
@@ -120,5 +134,17 @@ extension KickboardAddController: CLLocationManagerDelegate {
                 
             }
         }
+    }
+    
+    func locationSetting2() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        
+        //manager.addPositions(long: long, lati: lati)
+        
+        print(long)
+        print(lati)
+        lo = long
+        la = lati
     }
 }

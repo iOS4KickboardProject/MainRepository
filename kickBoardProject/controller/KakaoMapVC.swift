@@ -132,14 +132,14 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     func addViews() {
         print(la, lo)
         let defaultPosition = MapPoint(longitude: lo, latitude: la)
-        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 2)
+        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 7)
         mapController?.addView(mapviewInfo)
     }
     
     // 맵 이동 메서드
     func moveCamera(long: Double, lati: Double) {
         let mapView = mapController?.getView("mapview") as! KakaoMap
-        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 7, mapView: mapView)
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 3000))
     }
     
@@ -158,7 +158,7 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         createLabelLayer()
         createPoiStyle()
         // 여기에선 데이터가 있을 때 생성은 된다.
-        createPoi2()
+        createPoi()
     }
     
     // 뷰 추가 실패시 실행할 메서드
@@ -248,8 +248,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         moveCamera(long: long, lati: lati)
         // 불러오기를 자동으로 해야되는거고 그 이후 poi 하나만 사용하면 될 부분인거같음
         createPoi()
-        var poi = shared.poi!
-        userRepository.createPoi_Data(poi_ID: poi, long: long, lati: lati)
     }
     
     // 현 위치로 이동하기 위한 메서드
@@ -258,7 +256,7 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         guard let lati = locationManager.location?.coordinate.latitude else { return }
         
         let mapView = mapController?.getView("mapview") as! KakaoMap
-        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 17, mapView: mapView)
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 7, mapView: mapView)
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
     
@@ -283,7 +281,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         let _ = labelManager.addLabelLayer(option: layer)
     }
     
-    // poi 생성
     func createPoi() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
@@ -295,28 +292,7 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
             return
         }
-        for (index, position) in userRepository.poiPositions.enumerated() {
-            let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
-            if let poi = layer.addPoi(option: options, at: position) {
-                shared.poi = poi.itemID
-                poi.clickable = true
-                poi.addPoiTappedEventHandler(target: self, handler: KakaoMapVC.poiTappedHandler)
-                poi.show()
-            }
-        }
-    }
-    
-    func createPoi2() {
-        guard let long = locationManager.location?.coordinate.longitude else { return }
-        guard let lati = locationManager.location?.coordinate.latitude else { return }
-        
-        guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
-            return
-        }
-        let labelManager = mapView.getLabelManager()
-        guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
-            return
-        }
+        layer.clearAllItems()
         let mapPoint = MapPoint(longitude: long, latitude: lati)
         let option = PoiOptions(styleID: "blue", poiID: "createKickboard")
         if let poi = layer.addPoi(option: option, at: mapPoint) {
@@ -401,11 +377,6 @@ extension KakaoMapVC: CLLocationManagerDelegate {
     func locationSetting() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
-        
-        //manager.addPositions(long: long, lati: lati)
-        
-        print(long)
-        print(lati)
         lo = long
         la = lati
     }
