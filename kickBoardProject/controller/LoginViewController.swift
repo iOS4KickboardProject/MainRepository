@@ -18,13 +18,13 @@ class LoginViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        retrieveAutoLogin()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        retrieveAutoLogin()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
