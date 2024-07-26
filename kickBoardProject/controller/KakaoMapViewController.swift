@@ -171,7 +171,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     @objc func btnTapped() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
-        userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
         moveCamera(long: long, lati: lati)
         createPoi()
     }

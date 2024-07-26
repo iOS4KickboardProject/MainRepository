@@ -60,8 +60,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         
         mapController = KMController(viewContainer: mapContainer!)
         mapController?.delegate = self
-        
-        userRepository.fetchAllPois()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,7 +151,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         let view = mapController?.getView("mapview") as! KakaoMap
         view.viewRect = mapContainer!.bounds
         viewInit(viewName: viewName)
-        userRepository.fetchAllPois()
         
         createLabelLayer()
         createPoiStyle()
@@ -244,7 +241,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     @objc func btnTapped() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
-        userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
         moveCamera(long: long, lati: lati)
         // 불러오기를 자동으로 해야되는거고 그 이후 poi 하나만 사용하면 될 부분인거같음
         createPoi()
