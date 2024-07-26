@@ -13,6 +13,8 @@ class KickBoard {
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(didAddKickboardInfo(_:)), name: .didAddKickboardInfo, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateKickboardStatus(_:)), name: .didUpdateKickboardStatus, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(didDeleteKickboardInfo(_:)), name: .didDeleteKickboardInfo, object: nil)
     }
     
     func updateKickBoards(with kickboards: [KickboardStruct]) {
@@ -26,6 +28,14 @@ class KickBoard {
     func addKickBoard(_ kickboardInfo: KickboardStruct) {
         KickboardRepository.shared.addKickboardInfo(kickboardInfo)
     }
+    
+    func updateKickboardStatus(id: String, newStatus: String) {
+        KickboardRepository.shared.updateKickboardStatus(id: id, newStatus: newStatus)
+    }
+    
+    func deleteKickBoard(id: String) {
+        KickboardRepository.shared.deleteKickboard(id: id)
+    }
 
     @objc private func didAddKickboardInfo(_ notification: Notification) {
         if let success = notification.userInfo?["success"] as? Bool, success {
@@ -33,6 +43,32 @@ class KickBoard {
             KickboardRepository.shared.fetchKickboardInfos()
         } else {
             print("Failed to add kickboard")
+        }
+    }
+    
+    @objc private func didUpdateKickboardStatus(_ notification: Notification) {
+        if let success = notification.userInfo?["success"] as? Bool, success {
+//           let id = notification.userInfo?["id"] as? String,
+//           let newStatus = notification.userInfo?["newStatus"] as? String {
+//            // 업데이트 성공 시, 로컬 데이터도 업데이트
+//            if let index = kickBoards.firstIndex(where: { $0.id == id }) {
+//                kickBoards[index].status = newStatus
+//            }
+            KickboardRepository.shared.fetchKickboardInfos()
+            print("Kickboard status updated successfully")
+        } else {
+            print("Failed to update kickboard status")
+        }
+    }
+    
+    @objc private func didDeleteKickboardInfo(_ notification: Notification) {
+        if let success = notification.userInfo?["success"] as? Bool, success,
+           let id = notification.userInfo?["id"] as? String {
+            // 삭제 성공 시, 로컬 데이터도 업데이트
+            self.kickBoards.removeAll { $0.id == id }
+            print("Kickboard deleted successfully")
+        } else {
+            print("Failed to delete kickboard")
         }
     }
     
