@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  kickBoardProject
 //
-//  Created by 이득령 on 7/23/24.
+//  Created by 이득령 on 7/23/24
 ///
 
 import UIKit
@@ -60,6 +60,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         if mapController?.isEngineActive == false {
             mapController?.activateEngine()
         }
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,6 +81,14 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         if _appear && mapController?.isEngineActive == false {
             mapController?.activateEngine()
         }
+    }
+    //MARK: - Button
+    @objc
+    func touchUpPresentModalButton(_ sender: UIButton) {
+        let vc = RentModalViewcontroller()
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
+        self.present(vc, animated: true, completion: nil)
     }
     func authenticationFailed(_ errorCode: Int, desc: String) {
         print("error code: \(errorCode)")
@@ -114,8 +123,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let mapView = mapController?.getView("mapview") as! KakaoMap
         let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 3000))
-        
     }
+
     func viewInit(viewName: String) {
         print("OK")
     }
@@ -181,7 +190,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     @objc
     func touchUpPresentModalButton(_ sender: UIButton) {
-        let vc = ModelViewcontroller()
+        let vc = RentModalViewcontroller()
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.present(vc, animated: true, completion: nil)
     }
@@ -218,6 +227,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     var _auth: Bool
     var _appear: Bool
     let locationManager = CLLocationManager()
+
     let userRepository = UserRepository()
     
     
@@ -272,7 +282,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     func presentModalIfNeeded() {
         if modalShow {
-            let modalVC = ModelViewcontroller()
+            let modalVC = RentModalViewcontroller()
             modalVC.modalPresentationStyle = .pageSheet
             if let sheet = modalVC.sheetPresentationController {
                 sheet.detents = [.medium()]
@@ -314,7 +324,7 @@ extension KakaoMapViewController {
         locationManager.startUpdatingLocation()
     }
     private func setNavigation() {
-    //MARK: - 커스텀 NavigationBar Left Item
+        //MARK: - 커스텀 NavigationBar Left Item
         let buttonContainer = UIView()
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "currentLocation"), for: .normal)
