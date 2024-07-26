@@ -45,8 +45,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         mapController = KMController(viewContainer: mapContainer!)
         mapController?.delegate = self
         
-        userRepository.fetchAllPois()
-        
+        //userRepository.fetchAllPois()
+        KickboardRepository.shared.fetchKickboardInfos()
         createPoi()
     }
     
@@ -116,13 +116,13 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     func addViews() {
         let defaultPosition = MapPoint(longitude: 127.04460688284246, latitude: 37.50230993921022)
-        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 2)
+        let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 7)
         mapController?.addView(mapviewInfo)
     }
     func moveCamera(long: Double, lati: Double) {
         let mapView = mapController?.getView("mapview") as! KakaoMap
         let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
-        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 3000))
+        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
 
     func viewInit(viewName: String) {
@@ -133,7 +133,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let view = mapController?.getView("mapview") as! KakaoMap
         view.viewRect = mapContainer!.bounds
         viewInit(viewName: viewName)
-        userRepository.fetchAllPois()
         
         createLabelLayer()
         createPoiStyle()
@@ -175,8 +174,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
         moveCamera(long: long, lati: lati)
         createPoi()
-        var poi = shared.poi!
-        userRepository.createPoi_Data(poi_ID: poi, long: long, lati: lati)
     }
     
     @objc func moveToCurrentLocation() {
@@ -184,7 +181,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         guard let lati = locationManager.location?.coordinate.latitude else { return }
         
         let mapView = mapController?.getView("mapview") as! KakaoMap
-        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 17, mapView: mapView)
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
     
@@ -222,6 +219,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     let locationManager = CLLocationManager()
 
     let userRepository = UserRepository()
+    private var kickboards = KickBoard.shared.setKickBoards()
     
     
     func createPoiStyle() { // 보이는 스타일 정의
@@ -242,6 +240,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let _ = labelManager.addLabelLayer(option: layer)
     }
     func createPoi() {
+        kickboards = KickBoard.shared.setKickBoards()
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
         
@@ -252,15 +251,31 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
             return
         }
-        for (index, position) in userRepository.poiPositions.enumerated() {
+        layer.clearAllItems()
+        
+        for (index, kickboard) in kickboards.enumerated() {
             let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
-            if let poi = layer.addPoi(option: options, at: position) {
-                shared.poi = poi.itemID
+            guard let latitude = Double(kickboard.latitude) else { return }
+            guard let longitude = Double(kickboard.longitude) else { return }
+            let point = MapPoint(longitude: longitude, latitude: latitude)
+            if let poi = layer.addPoi(option: options, at: point) {
+                print("test2")
                 poi.clickable = true
                 poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
                 poi.show()
             }
         }
+        
+        
+//        for (index, position) in userRepository.poiPositions.enumerated() {
+//            let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
+//            if let poi = layer.addPoi(option: options, at: position) {
+//                shared.poi = poi.itemID
+//                poi.clickable = true
+//                poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
+//                poi.show()
+//            }
+//        }
     }
     
     func poiTappedHandler(_ param: PoiInteractionEventParam) {

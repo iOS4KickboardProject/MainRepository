@@ -17,6 +17,7 @@ class KickBoardAddView: UIView {
     let reloadButton = UIButton()
     let data = ["100%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", "0%"]
     var id = idSetting()
+    var battery = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -172,5 +173,6 @@ extension KickBoardAddView: UIPickerViewDelegate, UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("Selected: \(data[row])")
+        battery = data[row]
     }
 }
