@@ -78,6 +78,24 @@ class LoginViewController: UIViewController{
             showAlert(message: "비밀번호를 작성해 주세요.")
             return
         }
+        setAutoLoginYn()
+    }
+    func setAutoLoginYn(){
+        let alert = UIAlertController(title: "확인", message: "이후 앱이 실행될 때 로그인 화면을 건너 뛰시겠습니까?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "네", style: .default) { action in
+            UserDefaults.standard.setValue("Y", forKey: "autoLoginYn")
+            UserDefaults.standard.setValue(self.loginView.emailTextField.text!, forKey: "email")
+            self.retireveUserData()
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel) { action in
+            UserDefaults.standard.setValue("N", forKey: "autoLoginYn")
+            self.retireveUserData()
+        }
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true, completion: nil)
+    }
+    func retireveUserData(){
         userRepository.retrieveUserData(email: loginView.emailTextField.text!){ [weak self] user in
             guard let self = self else { return }
             self.user = user
@@ -89,7 +107,6 @@ class LoginViewController: UIViewController{
             }
         }
     }
-
     func showAlert(message: String){
         let alert = UIAlertController(title: "확인", message: "\(message)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
