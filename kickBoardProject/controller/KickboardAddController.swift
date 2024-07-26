@@ -18,7 +18,7 @@ class KickboardAddController: UIViewController {
     var mapController: KMController?
     var la: Double!
     var lo: Double!
-    let kakaoMapVC = KakaoMapViewController()
+    let kakaoMapVC = KakaoMapVC()
     
     let kickBoardAddView = KickBoardAddView()
     
@@ -43,8 +43,6 @@ class KickboardAddController: UIViewController {
         
         print(long)
         print(lati)
-        
-        kakaoMapVC.createPoi()
         
         kakaoMapVC.moveCamera(long: long, lati: lati)
     }

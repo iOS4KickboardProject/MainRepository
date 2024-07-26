@@ -11,14 +11,13 @@ class KickBoard {
     static let shared = KickBoard()
     private var kickBoards: [KickboardStruct] = []
     
+    private init(kickBoards: [KickboardStruct]) {
+        self.kickBoards = kickBoards
+    }
+    
     private init() {
         
     }
-    
-    func getKickBoards() -> [KickboardStruct] {
-        return kickBoards
-    }
-    
 }
 
 
