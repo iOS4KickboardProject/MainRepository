@@ -23,10 +23,10 @@ class CreateUserViewController: UIViewController, CreateUserViewDelegate{
     }
     
     func setAction(){
-        createUserView.createButton.addTarget(self, action: #selector(setAutoLoginYn), for: .touchDown)
+        createUserView.createButton.addTarget(self, action: #selector(createUserTapped), for: .touchDown)
     }
     
-    private func createUserTapped(){
+    @objc private func createUserTapped(){
         if createUserView.emailTextField.text!.isEmpty{
             showAlert(message: "이메일을 입력해 주세요")
             return
@@ -64,21 +64,7 @@ class CreateUserViewController: UIViewController, CreateUserViewDelegate{
         }
     }
     
-    @objc func setAutoLoginYn(){
-        let alert = UIAlertController(title: "확인", message: "이후 앱이 실행될 때 로그인 화면을 건너 뛰시겠습니까?", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "네", style: .default) { action in
-            UserDefaults.standard.setValue("Y", forKey: "autoLoginYn")
-            UserDefaults.standard.setValue(self.createUserView.emailTextField.text!, forKey: "email")
-            self.createUserTapped()
-        }
-        let noAction = UIAlertAction(title: "아니오", style: .cancel) { action in
-            UserDefaults.standard.setValue("N", forKey: "autoLoginYn")
-            self.createUserTapped()
-        }
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        present(alert, animated: true, completion: nil)
-    }
+    
     
     func showAlert(message: String){
         let alert = UIAlertController(title: "확인", message: "\(message)", preferredStyle: .alert)
