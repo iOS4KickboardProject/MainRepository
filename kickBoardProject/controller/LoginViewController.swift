@@ -108,6 +108,7 @@ class LoginViewController: UIViewController{
                 self.Pushtabbar()
                 UserModel.shared.fetchUser(user: user)
             } else {
+                UserDefaults.standard.setValue("N", forKey: "autoLoginYn")
                 showAlert(message: "로그인 정보를 다시 확인 해주세요.")
             }
         }
