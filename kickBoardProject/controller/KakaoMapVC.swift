@@ -262,14 +262,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
     
-    // poi 클릭시 열리는 메서드
-    @objc
-    func touchUpPresentModalButton(_ sender: UIButton) {
-        let vc = ModelViewcontroller()
-        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
-    
     // poi 스타일 정의
     func createPoiStyle() { // 보이는 스타일 정의
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
@@ -340,22 +332,7 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
         modalShow = true
-        presentModalIfNeeded()
         
-    }
-    
-    // 모달 생성
-    func presentModalIfNeeded() {
-        if modalShow {
-            let modalVC = ModelViewcontroller()
-            modalVC.modalPresentationStyle = .pageSheet
-            if let sheet = modalVC.sheetPresentationController {
-                sheet.detents = [.medium()]
-                sheet.preferredCornerRadius = 24.0
-            }
-            modalVC.preferredContentSize = CGSize(width: view.frame.width, height: 300)
-            present(modalVC, animated: true, completion: nil)
-        }
     }
     
     // mapview 새로고침

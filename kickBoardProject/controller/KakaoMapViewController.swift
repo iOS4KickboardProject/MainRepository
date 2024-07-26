@@ -188,13 +188,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
     
-    @objc
-    func touchUpPresentModalButton(_ sender: UIButton) {
-        let vc = RentModalViewcontroller()
-        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
-    
     func showToast(_ view: UIView, message: String, duration: TimeInterval = 2.0) {
         let toastLabel = UILabel()
         toastLabel.backgroundColor = UIColor.black
