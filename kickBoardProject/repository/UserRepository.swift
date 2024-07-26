@@ -12,11 +12,11 @@ import KakaoMapsSDK
 class UserRepository {
     var db: Firestore!
     var user: UserStruct!
-    
-    //    var poiPositions: [MapPoint] = []
-    
+    static let shared = UserRepository()
+
     var poiPositions: [MapPoint] = []
     
+    var poi: String?
     
     init() {
         db = Firestore.firestore()

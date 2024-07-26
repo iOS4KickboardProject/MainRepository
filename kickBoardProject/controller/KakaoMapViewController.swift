@@ -60,6 +60,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         if mapController?.isEngineActive == false {
             mapController?.activateEngine()
         }
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,7 +104,6 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         
         self.present(vc, animated: true, completion: nil)
     }
-    
     func authenticationFailed(_ errorCode: Int, desc: String) {
         print("error code: \(errorCode)")
         print("desc: \(desc)")
@@ -137,9 +137,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let mapView = mapController?.getView("mapview") as! KakaoMap
         let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 3000))
-        
     }
-    
+
     func viewInit(viewName: String) {
         print("OK")
     }
@@ -182,8 +181,32 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     @objc func didBecomeActive() {
         mapController?.activateEngine()
+    }
+    //MARK: - Button
+    @objc func btnTapped() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        userRepository.poiPositions.append(MapPoint(longitude: long, latitude: lati))
+        moveCamera(long: long, lati: lati)
+        createPoi()
+        var poi = shared.poi!
+        userRepository.createPoi_Data(poi_ID: poi, long: long, lati: lati)
+    }
+    
+    @objc func moveToCurrentLocation() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
         
-        
+        let mapView = mapController?.getView("mapview") as! KakaoMap
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 17, mapView: mapView)
+        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
+    }
+    
+    @objc
+    func touchUpPresentModalButton(_ sender: UIButton) {
+        let vc = ModelViewcontroller()
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     func showToast(_ view: UIView, message: String, duration: TimeInterval = 2.0) {
@@ -213,11 +236,12 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     var modalShow = false
     var mapContainer: KMViewContainer?
     var mapController: KMController?
+    var shared = UserRepository.shared
     var _observerAdded: Bool
     var _auth: Bool
     var _appear: Bool
-    let manager = MapManager.manager
     let locationManager = CLLocationManager()
+
     let userRepository = UserRepository()
     
     
@@ -252,7 +276,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         for (index, position) in userRepository.poiPositions.enumerated() {
             let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
             if let poi = layer.addPoi(option: options, at: position) {
-                MapManager.manager.poi = poi.itemID
+                shared.poi = poi.itemID
                 poi.clickable = true
                 poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
                 poi.show()
@@ -307,18 +331,33 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     }
 }
 extension KakaoMapViewController {
-    
     //MARK: - 워치 관련
     private func setLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-    
-    
-    
     private func setNavigation() {
-        title = "지도"
+        //MARK: - 커스텀 NavigationBar Left Item
+        let buttonContainer = UIView()
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "currentLocation"), for: .normal)
+        button.addTarget(self, action: #selector(moveToCurrentLocation), for: .touchUpInside)
+        
+        buttonContainer.addSubview(button)
+        button.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(5)
+        }
+        
+        buttonContainer.snp.makeConstraints {
+            $0.width.equalTo(40)
+            $0.height.equalTo(40)
+        }
+        
+        let currentLocation = UIBarButtonItem(customView: buttonContainer)
+        
+        navigationItem.leftBarButtonItem = currentLocation
+        
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.black
@@ -361,4 +400,7 @@ extension KakaoMapViewController: CLLocationManagerDelegate {
         }
         
     }
+}
+#Preview {
+    return KakaoMapViewController()
 }
