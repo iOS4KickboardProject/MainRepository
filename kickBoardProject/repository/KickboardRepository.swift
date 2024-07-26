@@ -38,8 +38,34 @@ class KickboardRepository {
             }
         }
     }
+    
+    func updateKickboardStatus(id: String, newStatus: String) {
+        let docRef = db.collection("kickboardInfo").document(id)
+        docRef.updateData(["status": newStatus]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+                NotificationCenter.default.post(name: .didUpdateKickboardStatus, object: nil, userInfo: ["success": false])
+            } else {
+                NotificationCenter.default.post(name: .didUpdateKickboardStatus, object: nil, userInfo: ["success": true, "id": id, "newStatus": newStatus])
+            }
+        }
+    }
+    
+    func deleteKickboard(id: String) {
+        let docRef = db.collection("kickboardInfo").document(id)
+        docRef.delete { error in
+            if let error = error {
+                print("Error deleting document: \(error)")
+                NotificationCenter.default.post(name: .didDeleteKickboardInfo, object: nil, userInfo: ["success": false])
+            } else {
+                NotificationCenter.default.post(name: .didDeleteKickboardInfo, object: nil, userInfo: ["success": true, "id": id])
+            }
+        }
+    }
 }
 
 extension Notification.Name {
     static let didAddKickboardInfo = Notification.Name("didAddKickboardInfo")
+    static let didUpdateKickboardStatus = Notification.Name("didUpdateKickboardStatus")
+    static let didDeleteKickboardInfo = Notification.Name("didDeleteKickboardInfo")
 }

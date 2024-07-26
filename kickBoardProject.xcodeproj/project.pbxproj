@@ -18,6 +18,8 @@
 		4F39BE742C51139F00BB7B6C /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE732C51139F00BB7B6C /* UserRepository.swift */; };
 		A2791E862C53B14D00E0505F /* KakaoMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2791E852C53B14D00E0505F /* KakaoMapVC.swift */; };
 		A2791E882C53D15D00E0505F /* KickboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2791E872C53D15D00E0505F /* KickboardRepository.swift */; };
+		A2791E8A2C54079D00E0505F /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2791E892C54079D00E0505F /* History.swift */; };
+		A2791E8C2C54096A00E0505F /* HistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2791E8B2C54096A00E0505F /* HistoryRepository.swift */; };
 		A2F041FF2C4F390F00722F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041FE2C4F390F00722F48 /* AppDelegate.swift */; };
 		A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F042002C4F390F00722F48 /* SceneDelegate.swift */; };
 		A2F042082C4F391100722F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F042072C4F391100722F48 /* Assets.xcassets */; };
@@ -48,6 +50,8 @@
 		4F39BE732C51139F00BB7B6C /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		A2791E852C53B14D00E0505F /* KakaoMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapVC.swift; sourceTree = "<group>"; };
 		A2791E872C53D15D00E0505F /* KickboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickboardRepository.swift; sourceTree = "<group>"; };
+		A2791E892C54079D00E0505F /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = History.swift; path = kickBoardProject/repository/History.swift; sourceTree = SOURCE_ROOT; };
+		A2791E8B2C54096A00E0505F /* HistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRepository.swift; sourceTree = "<group>"; };
 		A2F041FB2C4F390F00722F48 /* kickBoardProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kickBoardProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F041FE2C4F390F00722F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2F042002C4F390F00722F48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 			children = (
 				4F39BE732C51139F00BB7B6C /* UserRepository.swift */,
 				A2791E872C53D15D00E0505F /* KickboardRepository.swift */,
+				A2791E8B2C54096A00E0505F /* HistoryRepository.swift */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				F468EBA12C4F88CF00BC9766 /* empty.swift */,
 				A2F0421F2C50D04300722F48 /* Kickboard.swift */,
 				4F39BE702C50C79E00BB7B6C /* UserModel.swift */,
+				A2791E892C54079D00E0505F /* History.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 				F4BB0F392C521F9A00BC6742 /* MyPageViewController.swift in Sources */,
 				4F39BE652C4F702000BB7B6C /* CreateUserView.swift in Sources */,
 				4F39BE5F2C4F3FC400BB7B6C /* LoginViewController.swift in Sources */,
+				A2791E8C2C54096A00E0505F /* HistoryRepository.swift in Sources */,
 				A2791E862C53B14D00E0505F /* KakaoMapVC.swift in Sources */,
 				F468EBA02C4F837E00BC9766 /* TabBarController.swift in Sources */,
 				F4BB0F372C521F6C00BC6742 /* MyPageView.swift in Sources */,
@@ -275,6 +282,7 @@
 				A2F042012C4F390F00722F48 /* SceneDelegate.swift in Sources */,
 				F4BB0F3B2C523CB200BC6742 /* HistoryCell.swift in Sources */,
 				F40439D42C538AF200E28B77 /* RentModalView.swift in Sources */,
+				A2791E8A2C54079D00E0505F /* History.swift in Sources */,
 				4F39BE742C51139F00BB7B6C /* UserRepository.swift in Sources */,
 				A2791E882C53D15D00E0505F /* KickboardRepository.swift in Sources */,
 				4F39BE632C4F6D6600BB7B6C /* CreateUserViewController.swift in Sources */,
