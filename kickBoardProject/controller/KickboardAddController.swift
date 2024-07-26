@@ -18,7 +18,6 @@ class KickboardAddController: UIViewController {
     var mapController: KMController?
     var la: Double!
     var lo: Double!
-    let manager = MapManager.manager
     let kakaoMapVC = KakaoMapViewController()
     
     let kickBoardAddView = KickBoardAddView()
