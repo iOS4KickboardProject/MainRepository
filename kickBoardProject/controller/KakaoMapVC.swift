@@ -122,7 +122,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     
     // 지도 생성 메소드
     func addViews() {
-        print(la, lo)
         let defaultPosition = MapPoint(longitude: lo, latitude: la)
         let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 7)
         mapController?.addView(mapviewInfo)
@@ -255,12 +254,14 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
             return
         }
+        let trackingManager = mapView.getTrackingManager()
         layer.clearAllItems()
         let mapPoint = MapPoint(longitude: long, latitude: lati)
         let option = PoiOptions(styleID: "blue", poiID: "createKickboard")
         if let poi = layer.addPoi(option: option, at: mapPoint) {
             poi.clickable = true
             poi.show()
+            trackingManager.startTrackingPoi(poi)
         }
     }
     
@@ -307,6 +308,7 @@ extension KakaoMapVC: CLLocationManagerDelegate {
     func getLocationUsagePermission() {
         self.locationManager.requestWhenInUseAuthorization()
     }
+    
     func startLoactionUpdates() {
         locationManager.startUpdatingLocation()
     }
@@ -333,6 +335,7 @@ extension KakaoMapVC: CLLocationManagerDelegate {
         }
         
     }
+    
     func locationSetting() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }

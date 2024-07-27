@@ -12,6 +12,7 @@ class KickboardRepository {
     private let db = Firestore.firestore()
     static let shared = KickboardRepository()
     
+    // 킥보드 정보 조회
     func fetchKickboardInfos() {
         db.collection("kickboardInfo").getDocuments(source: .server) { (querySnapshot, error) in
             if let error = error {
@@ -28,6 +29,7 @@ class KickboardRepository {
         }
     }
     
+    // 킥보드 추가
     func addKickboardInfo(_ kickboardInfo: KickboardStruct) {
         db.collection("kickboardInfo").document(kickboardInfo.id).setData(kickboardInfo.dictionary) { error in
             if let error = error {
@@ -39,6 +41,7 @@ class KickboardRepository {
         }
     }
     
+    // 킥보드 상태 업데이트
     func updateKickboardStatus(id: String, newStatus: String) {
         let docRef = db.collection("kickboardInfo").document(id)
         docRef.updateData(["status": newStatus]) { error in
@@ -51,6 +54,7 @@ class KickboardRepository {
         }
     }
     
+    // 킥보드 삭제
     func deleteKickboard(id: String) {
         let docRef = db.collection("kickboardInfo").document(id)
         docRef.delete { error in
