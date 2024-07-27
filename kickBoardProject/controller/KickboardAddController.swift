@@ -32,6 +32,12 @@ class KickboardAddController: UIViewController {
         kickBoardAddView.reloadButton.addTarget(self, action: #selector(btnTapped), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        kickBoardAddView.battery = ""
+        kickBoardAddView.kickBoardBattery.text = ""
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
