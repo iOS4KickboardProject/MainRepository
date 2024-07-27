@@ -48,14 +48,9 @@ class KickBoard {
     
     @objc private func didUpdateKickboardStatus(_ notification: Notification) {
         if let success = notification.userInfo?["success"] as? Bool, success {
-//           let id = notification.userInfo?["id"] as? String,
-//           let newStatus = notification.userInfo?["newStatus"] as? String {
-//            // 업데이트 성공 시, 로컬 데이터도 업데이트
-//            if let index = kickBoards.firstIndex(where: { $0.id == id }) {
-//                kickBoards[index].status = newStatus
-//            }
             KickboardRepository.shared.fetchKickboardInfos()
             print("Kickboard status updated successfully")
+            // 이게 업데이트가 되면 kakaoMap을 리로드 시켜야 함
         } else {
             print("Failed to update kickboard status")
         }
@@ -82,6 +77,38 @@ class KickBoard {
         }
         return list
     }
+    
+    func isValidKickboard(id: String) -> Bool {
+        for i in kickBoards {
+            if i.id == id {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func findKickboard(id: String) -> KickboardStruct {
+        var kickboard = kickBoards[0]
+        for i in kickBoards {
+            if i.id == id {
+                kickboard = i
+                break
+            }
+        }
+        return kickboard
+    }
+    
+    func findKickboardId(status: String) -> String {
+        var kickboard = kickBoards[0]
+        for i in kickBoards {
+            if i.status == status {
+                kickboard = i
+                break
+            }
+        }
+        return kickboard.id
+    }
+    
 }
 
 
