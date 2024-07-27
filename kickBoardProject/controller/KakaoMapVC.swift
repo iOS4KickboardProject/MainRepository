@@ -254,14 +254,12 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         guard let layer = labelManager.getLabelLayer(layerID: "poiLayer") else {
             return
         }
-        let trackingManager = mapView.getTrackingManager()
         layer.clearAllItems()
         let mapPoint = MapPoint(longitude: long, latitude: lati)
         let option = PoiOptions(styleID: "blue", poiID: "createKickboard")
         if let poi = layer.addPoi(option: option, at: mapPoint) {
             poi.clickable = true
             poi.show()
-            trackingManager.startTrackingPoi(poi)
         }
     }
     
