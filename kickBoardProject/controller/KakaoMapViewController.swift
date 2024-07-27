@@ -280,6 +280,12 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         }
     }
     
+    func showAlert(message: String){
+        let alert = UIAlertController(title: "확인", message: "\(message)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     //MARK: - Poi 클릭 이벤트
     func poiTappedHandler(_ param: PoiInteractionEventParam) {
         print("click!!")
@@ -289,6 +295,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         // 유저의 상태가 빌린 상태라면 모달창이 뜨면 안된다
         if let status = UserModel.shared.getUser().lentalYn, status == "Y" {
             print("현재 사용중")
+            showAlert(message: "현재 다른 킥보드를 사용중 입니다.")
             return
         }
         // 킥보드 id 로 현재 킥보드 리스트에서 킥보드를 찾고 킥보드의 상태와 유저의 상태를 변경 시켜야 함

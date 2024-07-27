@@ -78,6 +78,12 @@ extension KickboardAddController {
         navigationItem.rightBarButtonItem = addButton
     }
     
+    func showAlert(message: String){
+        let alert = UIAlertController(title: "확인", message: "\(message)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc
     private func addButtonTapped() {
         // 킥보드 추가 버튼 클릭
@@ -88,6 +94,7 @@ extension KickboardAddController {
         let battery = kickBoardAddView.battery
         if battery == "" {
             print("배터리 정보 이상")
+            showAlert(message: "배터리 상태를 선택해주세요!")
             return
         }
         

@@ -78,7 +78,6 @@ class MyPageViewController: UIViewController {
             UserRepository.shared.updateUserLentalYn(email: email, lentalYn: "N")
             let id = KickBoard.shared.findKickboardId(status: email)
             KickBoard.shared.updateKickboardStatus(id: id, newStatus: "N")
-            // 히스토리 추가만 해주면 작업 끝
             let time = currentTime()
             let newHistory = HistoryStruct(dictionary: ["email": email, "kickboardId": id, "returnTime": time])
             if let history = newHistory {
@@ -190,13 +189,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableView == myPageView.kickboardTableView {
             let deleteAction = UIContextualAction(style: .destructive, title: "삭제하기") { (action, view, success ) in
-//                self.kickBoardItems.remove(at: indexPath.row)
                 KickBoard.shared.deleteKickBoard(id: self.myKickBoards[indexPath.row].id)
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                     self.reloadData()
                 }
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-                // 내 킥보드 삭제하는 코드
             }
             let config = UISwipeActionsConfiguration(actions: [deleteAction])
             config.performsFirstActionWithFullSwipe = false
