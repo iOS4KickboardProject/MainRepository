@@ -29,10 +29,12 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         mapController?.pauseEngine()
         mapController?.resetEngine()
         print("deinit")
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ModalDismissed"), object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name("ModalDismissed"), object: nil)
         setLocation()
         setNavigation()
         
@@ -253,43 +255,41 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         layer.clearAllItems()
         
         for (index, kickboard) in kickboards.enumerated() {
-            let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
-            guard let latitude = Double(kickboard.latitude) else { return }
-            guard let longitude = Double(kickboard.longitude) else { return }
-            let point = MapPoint(longitude: longitude, latitude: latitude)
-            if let poi = layer.addPoi(option: options, at: point) {
-                print("test2")
-                poi.clickable = true
-                poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
-                poi.show()
+            if kickboard.status == "N" {
+                let options = PoiOptions(styleID: "blue", poiID: "\(kickboard.id)")
+                guard let latitude = Double(kickboard.latitude) else { return }
+                guard let longitude = Double(kickboard.longitude) else { return }
+                let point = MapPoint(longitude: longitude, latitude: latitude)
+                if let poi = layer.addPoi(option: options, at: point) {
+                    poi.clickable = true
+                    poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
+                    poi.show()
+                }
             }
         }
-        
-        
-//        for (index, position) in userRepository.poiPositions.enumerated() {
-//            let options = PoiOptions(styleID: "blue", poiID: "bluePoi_\(index)")
-//            if let poi = layer.addPoi(option: options, at: position) {
-//                shared.poi = poi.itemID
-//                poi.clickable = true
-//                poi.addPoiTappedEventHandler(target: self, handler: KakaoMapViewController.poiTappedHandler)
-//                poi.show()
-//            }
-//        }
     }
     
     func poiTappedHandler(_ param: PoiInteractionEventParam) {
         print("click!!")
         print(param.poiItem.itemID)
-        guard let long = locationManager.location?.coordinate.longitude else { return }
-        guard let lati = locationManager.location?.coordinate.latitude else { return }
         modalShow = true
-        presentModalIfNeeded()
-        
+        let id = param.poiItem.itemID
+        // 유저의 상태가 빌린 상태라면 모달창이 뜨면 안된다
+        if let status = UserModel.shared.getUser().lentalYn, status == "Y" {
+            print("현재 사용중")
+            return
+        }
+        // 킥보드 id 로 현재 킥보드 리스트에서 킥보드를 찾고 킥보드의 상태와 유저의 상태를 변경 시켜야 함
+        if KickBoard.shared.isValidKickboard(id: id) {
+            let kickboard = KickBoard.shared.findKickboard(id: id)
+            presentModalIfNeeded(kickboard: kickboard)
+        }
     }
     
-    func presentModalIfNeeded() {
+    func presentModalIfNeeded(kickboard: KickboardStruct) {
         if modalShow {
             let modalVC = RentModalViewcontroller()
+            modalVC.kickboard = kickboard
             modalVC.modalPresentationStyle = .pageSheet
             if let sheet = modalVC.sheetPresentationController {
                 sheet.detents = [.medium()]
@@ -298,6 +298,12 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             modalVC.preferredContentSize = CGSize(width: view.frame.width, height: 300)
             present(modalVC, animated: true, completion: nil)
         }
+    }
+    
+    @objc func reloadData() {
+        // 데이터 리로드 작업 수행
+        print("Reloading data")
+        createPoi()
     }
     
     func reloadMapView() {

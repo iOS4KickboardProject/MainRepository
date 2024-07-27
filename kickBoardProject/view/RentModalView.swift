@@ -13,7 +13,7 @@ class RentModalView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "some-kickboard-id"
-        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.font = .systemFont(ofSize: 28, weight: .bold)
         label.textColor = .black
         return label
     }()

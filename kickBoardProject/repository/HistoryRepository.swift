@@ -13,7 +13,7 @@ class HistoryRepository {
     static let shared = HistoryRepository()
     
     func fetchHistoryInfos(for email: String) {
-        db.collection("historyInfo").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+        db.collection("history").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -29,7 +29,7 @@ class HistoryRepository {
     }
 
     func addHistoryInfo(_ historyInfo: HistoryStruct) {
-        db.collection("historyInfo").addDocument(data: historyInfo.dictionary) { error in
+        db.collection("history").addDocument(data: historyInfo.dictionary) { error in
             if let error = error {
                 print("Error adding document: \(error)")
                 NotificationCenter.default.post(name: .didAddHistoryInfo, object: nil, userInfo: ["success": false])
