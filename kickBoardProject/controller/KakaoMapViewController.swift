@@ -62,7 +62,8 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         if mapController?.isEngineActive == false {
             mapController?.activateEngine()
         }
-    
+        //Poi 패치
+        createPoi()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -123,7 +124,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
     }
     func moveCamera(long: Double, lati: Double) {
         let mapView = mapController?.getView("mapview") as! KakaoMap
-        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 18, mapView: mapView)
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
 
@@ -268,7 +269,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             }
         }
     }
-    
+    //MARK: - Poi 클릭 이벤트
     func poiTappedHandler(_ param: PoiInteractionEventParam) {
         print("click!!")
         print(param.poiItem.itemID)
@@ -283,6 +284,12 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         if KickBoard.shared.isValidKickboard(id: id) {
             let kickboard = KickBoard.shared.findKickboard(id: id)
             presentModalIfNeeded(kickboard: kickboard)
+            //Poi 클릭시 화면 이동
+            let long = Double(kickboard.longitude)!
+            let lati = Double(kickboard.latitude)!
+            
+            moveCamera(long: long, lati: lati)
+            
         }
     }
     
