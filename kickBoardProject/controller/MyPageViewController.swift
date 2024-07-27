@@ -30,11 +30,14 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = .white
         setNav()
         setTableView()
+        getHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadData()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+            self.reloadData()
+        }
         setReturnButton()
     }
     
@@ -100,6 +103,12 @@ class MyPageViewController: UIViewController {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let dateTimeString = formatter.string(from: now)
         return dateTimeString
+    }
+    
+    func getHistory() {
+        if let email = UserModel.shared.getUser().email {
+            History.shared.fetchHistories(for: email)
+        }
     }
     
     func reloadData() {
