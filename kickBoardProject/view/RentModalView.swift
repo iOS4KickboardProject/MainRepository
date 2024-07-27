@@ -87,7 +87,6 @@ class RentModalView: UIView {
         return stv
     }()
     private lazy var batteryMilegateStackView: UIStackView = {
-//        let stv = UIStackView(arrangedSubviews: [batteryLabel, batteryView, milegateLabel, milegateDistanceLabel])
         let stv = UIStackView(arrangedSubviews: [batteryStackView, milegateStackView])
         stv.axis = .vertical
         stv.distribution = .equalSpacing
