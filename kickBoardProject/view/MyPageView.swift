@@ -131,12 +131,19 @@ class MyPageView: UIView {
     }
     
     func viewChangeRental(status: String) {
+        removeAllSubview(view: statusView)
         switch status {
         case "Y":
-            [usingKickboardStackView, returnButton].forEach {
+            [statusLabel, usingKickboardStackView, returnButton].forEach {
                 statusView.addSubview($0)
             }
+            statusLabel.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalToSuperview()
+            }
+            
             usingKickboardStackView.snp.makeConstraints {
+                $0.top.equalTo(statusLabel.snp.bottom).offset(8)
                 $0.centerX.equalToSuperview()
                 $0.width.equalTo(self.layer.frame.width * 0.7)
                 $0.height.equalTo(30)
@@ -145,7 +152,7 @@ class MyPageView: UIView {
                 $0.size.equalTo(CGSize(width: 24, height: 24))
             }
             returnButton.snp.makeConstraints {
-                $0.height.equalTo(40)
+                $0.size.equalTo(CGSize(width: 80, height: 40))
                 $0.centerX.equalToSuperview()
                 $0.top.equalTo(usingKickboardStackView.snp.bottom).offset(8)
             }
@@ -155,6 +162,12 @@ class MyPageView: UIView {
             statusLabel.snp.makeConstraints {
                 $0.center.equalToSuperview()
             }
+        }
+    }
+    
+    func removeAllSubview(view: UIView) {
+        view.subviews.forEach { subview in
+            subview.removeFromSuperview()
         }
     }
     
