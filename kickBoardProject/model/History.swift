@@ -20,6 +20,7 @@ class History {
     }
 
     func getHistories() -> [HistoryStruct] {
+        sortHistory()
         return Historys
     }
 
@@ -29,6 +30,7 @@ class History {
 
     func fetchHistories(for email: String) {
         HistoryRepository.shared.fetchHistoryInfos(for: email)
+        sortHistory()
     }
 
     @objc private func didAddHistoryInfo(_ notification: Notification) {
@@ -37,11 +39,29 @@ class History {
             // 이메일을 기반으로 다시 히스토리를 가져옵니다.
             if let email = UserModel.shared.getUser().email {
                 HistoryRepository.shared.fetchHistoryInfos(for: email)
+                sortHistory()
             }
         } else {
             print("Failed to add history")
         }
     }
+    
+    func sortHistory() {
+        let sortedHistoryArray = Historys.sorted {
+            guard let date1 = dateFormatter.date(from: $0.returnTime),
+                  let date2 = dateFormatter.date(from: $1.returnTime) else {
+                return false
+            }
+            return date1 > date2
+        }
+        Historys = sortedHistoryArray
+    }
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        return formatter
+    }()
     
 }
 
