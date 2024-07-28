@@ -7,13 +7,14 @@
 
 import UIKit
 import SnapKit
+import Foundation
 
 class MyPageViewController: UIViewController {
     
     var myPageView: MyPageView!
 
-    var kickBoardItems: [(String, Int)] = [("first kickboard", 1), ("second kickboard", 25), ("third kickboard", 51), ("fourth kickboard", 75), ("fiveth kickboard", 100)]
-    let useItems = ["first used 1000$", "second usage 500$", "third usage 700$", "fourth usage 800$", "fiveth usage 900$"]
+    var myKickBoards: [KickboardStruct] = []
+    var history: [HistoryStruct] = []
     
     override func loadView() {
         super.loadView()
@@ -26,6 +27,16 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = .white
         setNav()
         setTableView()
+        myPageView.viewChangeRental(status: "Y")
+        getHistory()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+            self.reloadData()
+        }
+        setReturnButton()
     }
     
     func setTableView() {
@@ -42,6 +53,70 @@ class MyPageViewController: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [ .foregroundColor : UIColor.black]
         let logoutButton = UIBarButtonItem(title: "로그아웃", style: .plain, target: self, action: #selector(logoutTapped))
         navigationItem.rightBarButtonItem = logoutButton
+    }
+    
+    func setReturnButton() {
+        if let status = UserModel.shared.getUser().lentalYn, let email = UserModel.shared.getUser().email {
+            myPageView.viewChangeRental(status: status)
+            if status == "Y" {
+                myPageView.statusLabel.text = "사용중"
+                let kickboardID = KickBoard.shared.findKickboardId(status: email)
+                let kickboard = KickBoard.shared.findKickboard(id: kickboardID)
+                myPageView.returnButton.addTarget(self, action: #selector(kickboardReturn), for: .touchUpInside)
+                myPageView.kickboardIDLabel.text = kickboardID
+                myPageView.batteryPercentageLabel.text = "\(kickboard.battery)%"
+                myPageView.batteryImageView.image = setBatteryImage(percent: Int(kickboard.battery) ?? 101)
+            } else {
+                myPageView.statusLabel.text = "현재 이용중이 아닙니다"
+            }
+        }
+    }
+    
+    @objc
+    func kickboardReturn() {
+        // 반납 메서드
+        print("반납하기 버튼 클릭")
+        if let email = UserModel.shared.getUser().email {
+            UserRepository.shared.updateUserLentalYn(email: email, lentalYn: "N")
+            let id = KickBoard.shared.findKickboardId(status: email)
+            KickBoard.shared.updateKickboardStatus(id: id, newStatus: "N")
+            let time = currentTime()
+            let newHistory = HistoryStruct(dictionary: ["email": email, "kickboardId": id, "returnTime": time])
+            if let history = newHistory {
+                History.shared.addHistory(history)
+                print("히스토리 저장")
+            } else {
+                print("히스토리 저장 실패")
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+            self.setReturnButton()
+            self.reloadData()
+        }
+    }
+    
+    func currentTime() -> String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let dateTimeString = formatter.string(from: now)
+        return dateTimeString
+    }
+    
+    func getHistory() {
+        if let email = UserModel.shared.getUser().email {
+            History.shared.fetchHistories(for: email)
+        }
+    }
+    
+    func reloadData() {
+        history = History.shared.getHistories()
+        myKickBoards = KickBoard.shared.myKickboardList()
+        myPageView.kickboardTableView.reloadData()
+        myPageView.historyTableView.reloadData()
     }
     
     //배터리 이미지 0 25 50 75 100에 맞춰 변경
@@ -85,9 +160,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == myPageView.kickboardTableView {
-            return kickBoardItems.count
+//            return kickBoardItems.count
+            return myKickBoards.count
         } else if tableView == myPageView.historyTableView {
-            return useItems.count
+            return history.count
         }
         return 0
     }
@@ -95,14 +171,17 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == myPageView.kickboardTableView {
             let kickboardCell = tableView.dequeueReusableCell(withIdentifier: "AddedKickboardCell", for: indexPath) as! AddedKickboardCell
-            kickboardCell.kickboardName.text = kickBoardItems[indexPath.row].0
-            kickboardCell.batteryLabel.text = "\(kickBoardItems[indexPath.row].1)%"
-            kickboardCell.batteryImageView.image = setBatteryImage(percent: kickBoardItems[indexPath.row].1)
+            kickboardCell.kickboardName.text = myKickBoards[indexPath.row].id
+            guard let battery = Int(myKickBoards[indexPath.row].battery) else { return kickboardCell}
+            kickboardCell.batteryLabel.text = "\(battery)%"
+            kickboardCell.batteryImageView.image = setBatteryImage(percent: battery)
             kickboardCell.selectionStyle = .none
             // 내 킥보드 이름, 배터리 잔량
             return kickboardCell
         } else if tableView == myPageView.historyTableView {
             let historyCell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
+            historyCell.kickboardNameLabel.text = history[indexPath.row].kickboardId
+            historyCell.dateLabel.text = history[indexPath.row].returnTime
             historyCell.selectionStyle = .none
             return historyCell
         }
@@ -112,10 +191,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableView == myPageView.kickboardTableView {
             let deleteAction = UIContextualAction(style: .destructive, title: "삭제하기") { (action, view, success ) in
-                self.kickBoardItems.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                // 내 킥보드 삭제하는 코드
-                
+                KickBoard.shared.deleteKickBoard(id: self.myKickBoards[indexPath.row].id)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                    self.reloadData()
+                }
             }
             let config = UISwipeActionsConfiguration(actions: [deleteAction])
             config.performsFirstActionWithFullSwipe = false

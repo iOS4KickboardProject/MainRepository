@@ -13,6 +13,8 @@ class KickBoard {
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(didAddKickboardInfo(_:)), name: .didAddKickboardInfo, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateKickboardStatus(_:)), name: .didUpdateKickboardStatus, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(didDeleteKickboardInfo(_:)), name: .didDeleteKickboardInfo, object: nil)
     }
     
     func updateKickBoards(with kickboards: [KickboardStruct]) {
@@ -26,6 +28,14 @@ class KickBoard {
     func addKickBoard(_ kickboardInfo: KickboardStruct) {
         KickboardRepository.shared.addKickboardInfo(kickboardInfo)
     }
+    
+    func updateKickboardStatus(id: String, newStatus: String) {
+        KickboardRepository.shared.updateKickboardStatus(id: id, newStatus: newStatus)
+    }
+    
+    func deleteKickBoard(id: String) {
+        KickboardRepository.shared.deleteKickboard(id: id)
+    }
 
     @objc private func didAddKickboardInfo(_ notification: Notification) {
         if let success = notification.userInfo?["success"] as? Bool, success {
@@ -33,6 +43,28 @@ class KickBoard {
             KickboardRepository.shared.fetchKickboardInfos()
         } else {
             print("Failed to add kickboard")
+        }
+    }
+    
+    @objc private func didUpdateKickboardStatus(_ notification: Notification) {
+        if let success = notification.userInfo?["success"] as? Bool, success {
+            KickboardRepository.shared.fetchKickboardInfos()
+            print("Kickboard status updated successfully")
+            // 이게 업데이트가 되면 kakaoMap을 리로드 시켜야 함
+        } else {
+            print("Failed to update kickboard status")
+        }
+    }
+    
+    @objc private func didDeleteKickboardInfo(_ notification: Notification) {
+        if let success = notification.userInfo?["success"] as? Bool, success,
+           let id = notification.userInfo?["id"] as? String {
+            // 삭제 성공 시, 로컬 데이터도 업데이트
+            self.kickBoards.removeAll { $0.id == id }
+            //KickboardRepository.shared.fetchKickboardInfos()
+            print("Kickboard deleted successfully")
+        } else {
+            print("Failed to delete kickboard")
         }
     }
     
@@ -45,6 +77,38 @@ class KickBoard {
         }
         return list
     }
+    
+    func isValidKickboard(id: String) -> Bool {
+        for i in kickBoards {
+            if i.id == id {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func findKickboard(id: String) -> KickboardStruct {
+        var kickboard = kickBoards[0]
+        for i in kickBoards {
+            if i.id == id {
+                kickboard = i
+                break
+            }
+        }
+        return kickboard
+    }
+    
+    func findKickboardId(status: String) -> String {
+        var kickboard = kickBoards[0]
+        for i in kickBoards {
+            if i.status == status {
+                kickboard = i
+                break
+            }
+        }
+        return kickboard.id
+    }
+    
 }
 
 

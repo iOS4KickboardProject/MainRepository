@@ -15,7 +15,7 @@ class KickBoardAddView: UIView {
     let pickerView = UIPickerView()
     var mapView = UIView()
     let reloadButton = UIButton()
-    let data = ["100%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", "0%"]
+    let data = ["100", "90", "80", "70", "60", "50", "40", "30", "20", "10", "0"]
     var id = idSetting()
     var battery = ""
     
@@ -36,6 +36,7 @@ class KickBoardAddView: UIView {
     func configureBattery() {
         kickBoardBattery.borderStyle = .roundedRect
         kickBoardBattery.placeholder = "배터리 잔량을 선택하세요"
+        kickBoardBattery.delegate = self
     }
     
     func configureBatteryToolbar() {
@@ -99,7 +100,7 @@ class KickBoardAddView: UIView {
     @objc func donePicker() {
         let row = pickerView.selectedRow(inComponent: 0)
         pickerView.selectRow(row, inComponent: 0, animated: false)
-        kickBoardBattery.text = data[row]
+        kickBoardBattery.text = "\(data[row])%"
         kickBoardBattery.resignFirstResponder()
     }
 
@@ -168,11 +169,17 @@ extension KickBoardAddView: UIPickerViewDelegate, UIPickerViewDataSource {
 
     // UIPickerViewDelegate 메소드
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
+        return "\(data[row])%"
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("Selected: \(data[row])")
+        print("Selected: \(data[row])%")
         battery = data[row]
+    }
+}
+
+extension KickBoardAddView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
     }
 }

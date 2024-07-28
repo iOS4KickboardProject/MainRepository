@@ -9,9 +9,11 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 class CreateUserViewController: UIViewController, CreateUserViewDelegate{
+    
     let createUserView = CreateUserView()
     var userModel: UserModel?
     var userRepository = UserRepository()
+    
     override func loadView() {
         view = createUserView
     }
@@ -63,8 +65,6 @@ class CreateUserViewController: UIViewController, CreateUserViewDelegate{
             }
         }
     }
-    
-    
     
     func showAlert(message: String){
         let alert = UIAlertController(title: "확인", message: "\(message)", preferredStyle: .alert)
