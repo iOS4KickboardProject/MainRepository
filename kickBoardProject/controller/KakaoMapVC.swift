@@ -14,7 +14,6 @@ import KakaoMapsSDK
 class KakaoMapVC: UIViewController, MapControllerDelegate {
     // KakaoMap
     // 변수 부분
-    var modalShow = false
     var mapContainer: KMViewContainer?
     var mapController: KMController?
     var shared = UserRepository.shared
@@ -87,11 +86,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     }
     
     
-    
-    
-    
-    
-    
     func authenticationSucceeded() {
         if _auth == false {
             _auth = true
@@ -128,7 +122,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     
     // 지도 생성 메소드
     func addViews() {
-        print(la, lo)
         let defaultPosition = MapPoint(longitude: lo, latitude: la)
         let mapviewInfo = MapviewInfo(viewName: "mapview", viewInfoName: "map", defaultPosition: defaultPosition, defaultLevel: 7)
         mapController?.addView(mapviewInfo)
@@ -137,8 +130,8 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     // 맵 이동 메서드
     func moveCamera(long: Double, lati: Double) {
         let mapView = mapController?.getView("mapview") as! KakaoMap
-        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 7, mapView: mapView)
-        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 3000))
+        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 15, mapView: mapView)
+        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
     
     // 뷰 init
@@ -151,10 +144,9 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
         let view = mapController?.getView("mapview") as! KakaoMap
         view.viewRect = mapContainer!.bounds
         viewInit(viewName: viewName)
-        
+        moveCamera(long: lo, lati: la)
         createLabelLayer()
         createPoiStyle()
-        // 여기에선 데이터가 있을 때 생성은 된다.
         createPoi()
     }
     
@@ -222,38 +214,12 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //버튼 클릭인데 무슨 버튼일까 아마도 위치 가져오는 메서드 일꺼같음
+    //위치 가져오는 메서드
     @objc func btnTapped() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }
         moveCamera(long: long, lati: lati)
-        // 불러오기를 자동으로 해야되는거고 그 이후 poi 하나만 사용하면 될 부분인거같음
         createPoi()
-    }
-    
-    // 현 위치로 이동하기 위한 메서드
-    @objc func moveToCurrentLocation() {
-        guard let long = locationManager.location?.coordinate.longitude else { return }
-        guard let lati = locationManager.location?.coordinate.latitude else { return }
-        
-        let mapView = mapController?.getView("mapview") as! KakaoMap
-        let cameraUpdate: CameraUpdate = CameraUpdate.make(target: MapPoint(longitude: long, latitude: lati), zoomLevel: 7, mapView: mapView)
-        mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
     
     // poi 스타일 정의
@@ -301,10 +267,6 @@ class KakaoMapVC: UIViewController, MapControllerDelegate {
     func poiTappedHandler(_ param: PoiInteractionEventParam) {
         print("click!!")
         print(param.poiItem.itemID)
-        guard let long = locationManager.location?.coordinate.longitude else { return }
-        guard let lati = locationManager.location?.coordinate.latitude else { return }
-        modalShow = true
-        
     }
     
     // mapview 새로고침
@@ -344,6 +306,7 @@ extension KakaoMapVC: CLLocationManagerDelegate {
     func getLocationUsagePermission() {
         self.locationManager.requestWhenInUseAuthorization()
     }
+    
     func startLoactionUpdates() {
         locationManager.startUpdatingLocation()
     }
@@ -370,6 +333,7 @@ extension KakaoMapVC: CLLocationManagerDelegate {
         }
         
     }
+    
     func locationSetting() {
         guard let long = locationManager.location?.coordinate.longitude else { return }
         guard let lati = locationManager.location?.coordinate.latitude else { return }

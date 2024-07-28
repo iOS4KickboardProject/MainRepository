@@ -13,7 +13,7 @@ class RentModalView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "some-kickboard-id"
-        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.font = .systemFont(ofSize: 28, weight: .bold)
         label.textColor = .black
         return label
     }()
@@ -90,7 +90,6 @@ class RentModalView: UIView {
     }()
 
     private lazy var batteryMilegateStackView: UIStackView = {
-//        let stv = UIStackView(arrangedSubviews: [batteryLabel, batteryView, milegateLabel, milegateDistanceLabel])
         let stv = UIStackView(arrangedSubviews: [batteryStackView, milegateStackView])
         stv.axis = .vertical
         stv.distribution = .equalSpacing

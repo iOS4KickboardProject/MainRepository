@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Foundation
 
 class MyPageViewController: UIViewController {
     
@@ -27,11 +28,15 @@ class MyPageViewController: UIViewController {
         setNav()
         setTableView()
         myPageView.viewChangeRental(status: "Y")
+        getHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadData()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+            self.reloadData()
+        }
+        setReturnButton()
     }
     
     func setTableView() {
@@ -48,6 +53,59 @@ class MyPageViewController: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [ .foregroundColor : UIColor.black]
         let logoutButton = UIBarButtonItem(title: "로그아웃", style: .plain, target: self, action: #selector(logoutTapped))
         navigationItem.rightBarButtonItem = logoutButton
+    }
+    
+    func setReturnButton() {
+        if let status = UserModel.shared.getUser().lentalYn {
+            if status == "Y" {
+                let returnButton = UIBarButtonItem(title: "반납", style: .plain, target: self, action: #selector(kickboardReturn))
+                navigationItem.leftBarButtonItem = returnButton
+                myPageView.statusLabel.text = "현재 이용중 입니다"
+            } else {
+                navigationItem.leftBarButtonItem = nil
+                myPageView.statusLabel.text = "현재 이용중이 아닙니다"
+            }
+        }
+    }
+    
+    @objc
+    func kickboardReturn() {
+        // 반납 메서드
+        print("반납하기 버튼 클릭")
+        if let email = UserModel.shared.getUser().email {
+            UserRepository.shared.updateUserLentalYn(email: email, lentalYn: "N")
+            let id = KickBoard.shared.findKickboardId(status: email)
+            KickBoard.shared.updateKickboardStatus(id: id, newStatus: "N")
+            let time = currentTime()
+            let newHistory = HistoryStruct(dictionary: ["email": email, "kickboardId": id, "returnTime": time])
+            if let history = newHistory {
+                History.shared.addHistory(history)
+                print("히스토리 저장")
+            } else {
+                print("히스토리 저장 실패")
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+            self.setReturnButton()
+            self.reloadData()
+        }
+    }
+    
+    func currentTime() -> String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let dateTimeString = formatter.string(from: now)
+        return dateTimeString
+    }
+    
+    func getHistory() {
+        if let email = UserModel.shared.getUser().email {
+            History.shared.fetchHistories(for: email)
+        }
     }
     
     func reloadData() {
@@ -129,13 +187,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableView == myPageView.kickboardTableView {
             let deleteAction = UIContextualAction(style: .destructive, title: "삭제하기") { (action, view, success ) in
-//                self.kickBoardItems.remove(at: indexPath.row)
                 KickBoard.shared.deleteKickBoard(id: self.myKickBoards[indexPath.row].id)
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                     self.reloadData()
                 }
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-                // 내 킥보드 삭제하는 코드
             }
             let config = UISwipeActionsConfiguration(actions: [deleteAction])
             config.performsFirstActionWithFullSwipe = false

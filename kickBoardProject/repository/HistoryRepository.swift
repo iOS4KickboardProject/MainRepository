@@ -12,8 +12,9 @@ class HistoryRepository {
     private let db = Firestore.firestore()
     static let shared = HistoryRepository()
     
+    // 사용내역 조회
     func fetchHistoryInfos(for email: String) {
-        db.collection("historyInfo").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+        db.collection("history").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -28,8 +29,9 @@ class HistoryRepository {
         }
     }
 
+    // 사용내역 추가
     func addHistoryInfo(_ historyInfo: HistoryStruct) {
-        db.collection("historyInfo").addDocument(data: historyInfo.dictionary) { error in
+        db.collection("history").addDocument(data: historyInfo.dictionary) { error in
             if let error = error {
                 print("Error adding document: \(error)")
                 NotificationCenter.default.post(name: .didAddHistoryInfo, object: nil, userInfo: ["success": false])
@@ -39,6 +41,7 @@ class HistoryRepository {
         }
     }
 }
+
 extension Notification.Name {
     static let didAddHistoryInfo = Notification.Name("didAddHistoryInfo")
 }
