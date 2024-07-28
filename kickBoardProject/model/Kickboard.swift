@@ -33,6 +33,10 @@ class KickBoard {
         KickboardRepository.shared.updateKickboardStatus(id: id, newStatus: newStatus)
     }
     
+    func updateKickboardLocation(id: String, long: String, lati: String) {
+        KickboardRepository.shared.updateKickboardLocation(id: id, long: long, lati: lati)
+    }
+    
     func deleteKickBoard(id: String) {
         KickboardRepository.shared.deleteKickboard(id: id)
     }
@@ -65,6 +69,15 @@ class KickBoard {
             print("Kickboard deleted successfully")
         } else {
             print("Failed to delete kickboard")
+        }
+    }
+    
+    @objc private func didUpdateKickboardLoocation(_ notification: Notification) {
+        if let success = notification.userInfo?["success"] as? Bool, success {
+            KickboardRepository.shared.fetchKickboardInfos()
+            print("Kickboard location updated successfully")
+        } else {
+            print("Failed to update kickboard Location")
         }
     }
     

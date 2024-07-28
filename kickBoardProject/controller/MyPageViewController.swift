@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Foundation
+import CoreLocation
 
 class MyPageViewController: UIViewController {
     
@@ -15,6 +16,9 @@ class MyPageViewController: UIViewController {
 
     var myKickBoards: [KickboardStruct] = []
     var history: [HistoryStruct] = []
+    let locationManager = CLLocationManager()
+    var lo = 0.0
+    var la = 0.0
     
     override func loadView() {
         super.loadView()
@@ -29,10 +33,12 @@ class MyPageViewController: UIViewController {
         setTableView()
         myPageView.viewChangeRental(status: "Y")
         getHistory()
+        setLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        locationSetting()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
             self.reloadData()
         }
@@ -56,15 +62,15 @@ class MyPageViewController: UIViewController {
     }
     
     func setReturnButton() {
-        if let status = UserModel.shared.getUser().lentalYn {
+        if let status = UserModel.shared.getUser().lentalYn, let email = UserModel.shared.getUser().email {
             myPageView.viewChangeRental(status: status)
             if status == "Y" {
                 myPageView.statusLabel.text = "사용중"
-                let kickboardID = KickBoard.shared.findKickboardId(status: status)
+                let kickboardID = KickBoard.shared.findKickboardId(status: email)
                 let kickboard = KickBoard.shared.findKickboard(id: kickboardID)
                 myPageView.returnButton.addTarget(self, action: #selector(kickboardReturn), for: .touchUpInside)
                 myPageView.kickboardIDLabel.text = kickboardID
-                myPageView.batteryPercentageLabel.text = kickboard.battery
+                myPageView.batteryPercentageLabel.text = "\(kickboard.battery)%"
                 myPageView.batteryImageView.image = setBatteryImage(percent: Int(kickboard.battery) ?? 101)
             } else {
                 myPageView.statusLabel.text = "현재 이용중이 아닙니다"
@@ -80,6 +86,7 @@ class MyPageViewController: UIViewController {
             UserRepository.shared.updateUserLentalYn(email: email, lentalYn: "N")
             let id = KickBoard.shared.findKickboardId(status: email)
             KickBoard.shared.updateKickboardStatus(id: id, newStatus: "N")
+            KickBoard.shared.updateKickboardLocation(id: id, long: String(lo), lati: String(la))
             let time = currentTime()
             let newHistory = HistoryStruct(dictionary: ["email": email, "kickboardId": id, "returnTime": time])
             if let history = newHistory {
@@ -201,5 +208,52 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             return config
         }
         return UISwipeActionsConfiguration()
+    }
+}
+
+extension MyPageViewController: CLLocationManagerDelegate {
+    // CoreLocation
+    private func setLocation() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func getLocationUsagePermission() {
+        self.locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func startLoactionUpdates() {
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("didUpdateLocations")
+        if let location = locations.first {
+            print("위도: \(location.coordinate.latitude)")
+            print("경도: \(location.coordinate.longitude)")
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("권한 설정됨")
+            case .notDetermined:
+                print("권한 설정되지 않음")
+            case .restricted:
+                print("권한 요청 거부됨")
+            default:
+                print("GPS default")
+                
+            }
+        }
+        
+    }
+    
+    func locationSetting() {
+        guard let long = locationManager.location?.coordinate.longitude else { return }
+        guard let lati = locationManager.location?.coordinate.latitude else { return }
+        lo = long
+        la = lati
     }
 }

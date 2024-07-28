@@ -58,6 +58,18 @@ class KickboardRepository {
         }
     }
     
+    func updateKickboardLocation(id: String, long: String, lati: String) {
+        let docRef = db.collection("kickboardInfo").document(id)
+        docRef.updateData(["longitude": long, "latitude": lati]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+                NotificationCenter.default.post(name: .didUpdateKickboardLoocation, object: nil, userInfo: ["success": false])
+            } else {
+                NotificationCenter.default.post(name: .didUpdateKickboardLoocation, object: nil, userInfo: ["success": true, "id": id, "long": long, "lati": lati])
+            }
+        }
+    }
+    
     // 킥보드 삭제
     func deleteKickboard(id: String) {
         let docRef = db.collection("kickboardInfo").document(id)
@@ -76,4 +88,5 @@ extension Notification.Name {
     static let didAddKickboardInfo = Notification.Name("didAddKickboardInfo")
     static let didUpdateKickboardStatus = Notification.Name("didUpdateKickboardStatus")
     static let didDeleteKickboardInfo = Notification.Name("didDeleteKickboardInfo")
+    static let didUpdateKickboardLoocation = Notification.Name("didUpdateKickboardLoocation")
 }
