@@ -12,9 +12,6 @@ class MyPageViewController: UIViewController {
     
     var myPageView: MyPageView!
 
-    var kickBoardItems: [(String, Int)] = [("first kickboard", 1), ("second kickboard", 25), ("third kickboard", 51), ("fourth kickboard", 75), ("fiveth kickboard", 100)]
-    let useItems = ["first used 1000$", "second usage 500$", "third usage 700$", "fourth usage 800$", "fiveth usage 900$"]
-    
     var myKickBoards: [KickboardStruct] = []
     var history: [HistoryStruct] = []
     
@@ -29,6 +26,7 @@ class MyPageViewController: UIViewController {
         view.backgroundColor = .white
         setNav()
         setTableView()
+        myPageView.viewChangeRental(status: "Y")
     }
     
     override func viewWillAppear(_ animated: Bool) {

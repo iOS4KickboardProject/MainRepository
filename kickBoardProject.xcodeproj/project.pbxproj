@@ -151,6 +151,7 @@
 		A2F042162C4F3E6500722F48 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				F4BB0F362C521F6C00BC6742 /* MyPageView.swift */,
 				F4BB0F342C521F5D00BC6742 /* AddedKickboardCell.swift */,
 				4F39BE602C4F3FD400BB7B6C /* LoginView.swift */,
 				4F39BE642C4F702000BB7B6C /* CreateUserView.swift */,
@@ -169,7 +170,6 @@
 				AF1623232C4F4DFE00861F3A /* KakaoMapViewController.swift */,
 				F468EB9F2C4F837E00BC9766 /* TabBarController.swift */,
 				A2F0421B2C4F8DD300722F48 /* KickboardAddController.swift */,
-				F4BB0F362C521F6C00BC6742 /* MyPageView.swift */,
 				F4BB0F382C521F9A00BC6742 /* MyPageViewController.swift */,
 				AF68D8632C525B5A00489DF6 /* RentModalViewcontroller.swift */,
 				A2791E852C53B14D00E0505F /* KakaoMapVC.swift */,
