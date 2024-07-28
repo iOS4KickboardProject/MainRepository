@@ -17,14 +17,14 @@ class RentModalView: UIView {
         label.textColor = .black
         return label
     }()
-    
+
     private let kickboardImgView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.image = UIImage(named: "kickboardpic")
         return iv
     }()
-    
+
     private let batteryLabel: UILabel = {
         let label = UILabel()
         label.text = "배터리 잔량"
@@ -33,7 +33,7 @@ class RentModalView: UIView {
         label.textColor = .black
         return label
     }()
-    
+
     let batteryPercentageLabel: UILabel = {
         let label = UILabel()
         label.text = "75%"
@@ -42,7 +42,7 @@ class RentModalView: UIView {
         label.textColor = .black
         return label
     }()
-    
+
     let batteryImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -50,13 +50,13 @@ class RentModalView: UIView {
         iv.tintColor = .black
         return iv
     }()
-    
+
     private lazy var batteryView: UIView = {
         let v = UIView()
         [batteryPercentageLabel, batteryImageView].forEach { v.addSubview($0) }
         return v
     }()
-    
+
     private let milegateLabel: UILabel = {
         let label = UILabel()
         label.text = "주행가능거리"
@@ -65,7 +65,7 @@ class RentModalView: UIView {
         label.textColor = .black
         return label
     }()
-    
+
     let milegateDistanceLabel: UILabel = {
         let label = UILabel()
         label.text = "10km"
@@ -74,25 +74,28 @@ class RentModalView: UIView {
         label.textColor = .black
         return label
     }()
+
     private lazy var batteryStackView: UIStackView = {
         let stv = UIStackView(arrangedSubviews: [batteryLabel, batteryView])
         stv.axis = .horizontal
         stv.distribution = .fillEqually
         return stv
     }()
+
     private lazy var milegateStackView: UIStackView = {
         let stv = UIStackView(arrangedSubviews: [milegateLabel, milegateDistanceLabel])
         stv.axis = .horizontal
         stv.distribution = .fillEqually
         return stv
     }()
+
     private lazy var batteryMilegateStackView: UIStackView = {
         let stv = UIStackView(arrangedSubviews: [batteryStackView, milegateStackView])
         stv.axis = .vertical
         stv.distribution = .equalSpacing
         return stv
     }()
-    
+
     let rentBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("대여하기", for: .normal)
@@ -102,32 +105,31 @@ class RentModalView: UIView {
         btn.layer.cornerRadius = 16
         return btn
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configureUI() {
         self.backgroundColor = .white
-        
+
         [titleLabel, kickboardImgView, batteryMilegateStackView, rentBtn].forEach {
             self.addSubview($0)
         }
-        
+
         titleLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(16)
         }
-        
+
         kickboardImgView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.size.equalTo(CGSize(width: 100, height: 100))
-            
         }
         rentBtn.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview().inset(24)
