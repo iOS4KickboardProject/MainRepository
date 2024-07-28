@@ -56,15 +56,15 @@ class MyPageViewController: UIViewController {
     }
     
     func setReturnButton() {
-        if let status = UserModel.shared.getUser().lentalYn {
+        if let status = UserModel.shared.getUser().lentalYn, let email = UserModel.shared.getUser().email {
             myPageView.viewChangeRental(status: status)
             if status == "Y" {
                 myPageView.statusLabel.text = "사용중"
-                let kickboardID = KickBoard.shared.findKickboardId(status: status)
+                let kickboardID = KickBoard.shared.findKickboardId(status: email)
                 let kickboard = KickBoard.shared.findKickboard(id: kickboardID)
                 myPageView.returnButton.addTarget(self, action: #selector(kickboardReturn), for: .touchUpInside)
                 myPageView.kickboardIDLabel.text = kickboardID
-                myPageView.batteryPercentageLabel.text = kickboard.battery
+                myPageView.batteryPercentageLabel.text = "\(kickboard.battery)%"
                 myPageView.batteryImageView.image = setBatteryImage(percent: Int(kickboard.battery) ?? 101)
             } else {
                 myPageView.statusLabel.text = "현재 이용중이 아닙니다"
