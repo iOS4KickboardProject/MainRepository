@@ -12,9 +12,11 @@ import CoreLocation
 class KakaoMapViewController: UIViewController, MapControllerDelegate {
     
     var modalShow = false
+    var qrVCModalShow = false
     var mapContainer: KMViewContainer?
     var mapController: KMController?
     var shared = UserRepository.shared
+    var kickboard = KickboardRepository.shared
     var _observerAdded: Bool
     var _auth: Bool
     var _appear: Bool
@@ -59,13 +61,28 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         mapContainer?.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
         mapController = KMController(viewContainer: mapContainer!)
         mapController?.delegate = self
         
         //userRepository.fetchAllPois()
         KickboardRepository.shared.fetchKickboardInfos()
         createPoi()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if kickboard.qrMOdalShow {
+            modalShow = true
+            guard let id = kickboard.kickboardID else { return }
+            let kickboard = KickBoard.shared.findKickboard(id: id)
+            presentModalIfNeeded(kickboard: kickboard)
+            print("showQRCode Modal ID\(id)")
+            let long = Double(kickboard.longitude)!
+            let lati = Double(kickboard.latitude)!
+            print(lati)
+            print(long)
+            moveCamera(long: long, lati: lati)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +99,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
             self.createPoi()
         }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -148,7 +166,7 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         let view = mapController?.getView("mapview") as! KakaoMap
         view.viewRect = mapContainer!.bounds
         viewInit(viewName: viewName)
-        moveToCurrentLocation()
+//        moveToCurrentLocation()
         createLabelLayer()
         createPoiStyle()
         createPoi()
@@ -234,6 +252,11 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         mapView.animateCamera(cameraUpdate: cameraUpdate, options: CameraAnimationOptions(autoElevation: true, consecutive: true, durationInMillis: 1000))
     }
     
+    @objc func openQRScanner() {
+            let qrScannerVC = QRcodeViewcontroller()
+            qrScannerVC.modalPresentationStyle = .fullScreen
+            present(qrScannerVC, animated: true, completion: nil)
+        }
     func createPoiStyle() { // 보이는 스타일 정의
         guard let mapView = mapController?.getView("mapview") as? KakaoMap else {
             return
@@ -291,7 +314,9 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
         print("click!!")
         print(param.poiItem.itemID)
         modalShow = true
+        
         let id = param.poiItem.itemID
+            
         // 유저의 상태가 빌린 상태라면 모달창이 뜨면 안된다
         if let status = UserModel.shared.getUser().lentalYn, status == "Y" {
             print("현재 사용중")
@@ -303,11 +328,11 @@ class KakaoMapViewController: UIViewController, MapControllerDelegate {
             let kickboard = KickBoard.shared.findKickboard(id: id)
             presentModalIfNeeded(kickboard: kickboard)
             //Poi 클릭시 화면 이동
+            print("Poi 클릭시 ID\(id)")
             let long = Double(kickboard.longitude)!
             let lati = Double(kickboard.latitude)!
             
             moveCamera(long: long, lati: lati)
-            
         }
     }
     
@@ -386,7 +411,7 @@ extension KakaoMapViewController {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.black
         ]
-        let addButton = UIBarButtonItem(title: "불러오기", style: .plain, target: self, action: #selector(btnTapped))
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "qrcode.viewfinder"), style: .plain, target: self, action: #selector(openQRScanner))
         addButton.tintColor = UIColor.gray
         navigationItem.rightBarButtonItem = addButton
     }
