@@ -12,6 +12,10 @@ class KickboardRepository {
     private let db = Firestore.firestore()
     static let shared = KickboardRepository()
     
+    private init() { }
+    
+    var kickboardID: String?
+    var qrMOdalShow = false
     // 킥보드 정보 조회
     func fetchKickboardInfos() {
         db.collection("kickboardInfo").getDocuments(source: .server) { (querySnapshot, error) in
