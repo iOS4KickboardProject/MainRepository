@@ -64,7 +64,7 @@ class MyPageViewController: UIViewController {
                 let kickboard = KickBoard.shared.findKickboard(id: kickboardID)
                 myPageView.returnButton.addTarget(self, action: #selector(kickboardReturn), for: .touchUpInside)
                 myPageView.kickboardIDLabel.text = kickboardID
-                myPageView.batteryPercentageLabel.text = kickboard.battery
+                myPageView.batteryPercentageLabel.text = kickboard.battery + "%"
                 myPageView.batteryImageView.image = setBatteryImage(percent: Int(kickboard.battery) ?? 101)
             } else {
                 myPageView.statusLabel.text = "현재 이용중이 아닙니다"
