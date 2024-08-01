@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         //Kakao 인증
-        SDKInitializer.InitSDK(appKey: "7d630328045e92ea340b5304658df041")
+        SDKInitializer.InitSDK(appKey: "안알려줘 ~ ")
         //FireBase연결
         FirebaseApp.configure()
         return true
